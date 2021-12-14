@@ -1,0 +1,106 @@
+.MenuNav {
+  border: 1px solid #cb674e;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #000000;
+  font-weight: 600;
+}
+
+.MonForm {
+  display: flex;
+  flex-wrap: nowrap;
+
+}
+input[type='text']:focus{
+  border-color: #eaedf7;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+}
+.reset {
+  background-color: #FFFFFF;
+  border-radius: 1px;
+  border: 1px solid #eaedf7;
+}
+
+.MenuNav:hover {
+  background-color: #cb674e;
+  color: #FFFFFF !important;
+
+}
+
+.Rectangle {
+  margin: 3.6px 0 0 0.3px;
+  padding: 6.4px 55.5px 38px 54.8px;
+  box-shadow: 0 1px 2px 0 rgba(28, 41, 90, 0.04);
+  /*border: solid 0.5px #eaedf7;*/
+  background-color: #fff;
+}
+
+.classMenuProduct {
+  overflow: hidden;
+}
+
+input[type='text'] {
+  padding: 0 0 0 20px;
+}
+
+.classMenuProduct .nav-resto {
+  display: block;
+}
+
+.classMenuProduct .icon {
+  display: none;
+}
+
+.activeButtonMenu {
+  background-color: #cb674e !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.filter-content {
+  border-left: 0;
+  border-bottom: 0;
+  border-right: 0.3px;
+  border-top: 0;
+  border-style: solid;
+  border-color: #e7e7e7;
+  padding: 0 25px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .classMenuProduct .nav-resto {
+    display: none;
+  }
+
+  .classMenuProduct .icon {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .classMenuProduct .icon span {
+    float: left;
+  }
+
+  .classMenuProduct .icon button[class='btn'] {
+    float: right;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .classMenuProduct.responsive .nav-resto {
+    display: block;
+  }
+
+  .filter-content {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.3px;
+    border-top: 0;
+    border-style: solid;
+    border-color: #e7e7e7;
+    padding: 0 0 15px 0;
+  }
+
+}

@@ -1,0 +1,18 @@
+.activeButtonMenu {
+  background-color: #cb674e !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
+}
+.btnRegime {
+  background-color: #FFFFFF;
+  border: 1px solid #cb674e;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+.btnRegime:hover {
+  background-color: #cb674e !important;
+  color: #FFFFFF !important;
+}

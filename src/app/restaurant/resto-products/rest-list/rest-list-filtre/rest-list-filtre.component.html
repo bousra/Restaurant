@@ -1,0 +1,66 @@
+<div>
+  <div>
+    <h4 style="color: #cb674e;font-weight: 600;text-align: left">Filtres</h4>
+  </div>
+  <!--
+  npm i @angular-slider/ngx-slider
+  https://angular-slider.github.io/ngx-slider/docs
+  -->
+  <div class="filter-content">
+    <!-- <intervalle de prix-->
+    <div>
+      <h4 style="font-weight: 600;text-align: left">Intervalle de prix</h4>
+      <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"
+                  style="color: #e46e0a;"></ngx-slider>
+    </div>
+    <!-- Regime and note-->
+    <div>
+      <h5 style="font-weight: 600; text-align: left;">R&eacute;gime alimentaire</h5>
+      <div class="row" *ngIf="(productsInput$ | async) as result">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+          <button class="btn btnRegime"
+                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_BIO_PRODUCTS?'activeButtonMenu':''"
+                  (click)="onGetBioProducts()" style="margin-left: 5px">Bio
+          </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+          <button class="btn btnRegime"
+                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS?'activeButtonMenu':''"
+                  (click)="onGetVegetarienProducts()" style="margin-left: 5px">V&eacute;g&eacute;tarien
+          </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+          <button class="btn btnRegime"
+                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_VEGAN_PRODUCTS?'activeButtonMenu':''"
+                  (click)="onGetVeganProducts()" style="margin-left: 5px">V&eacute;gan
+          </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+          <button class="btn btnRegime"
+                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS?'activeButtonMenu':''"
+                  (click)="onGetSansGlutenProducts()" style="margin-left: 5px">Sans gluten
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-weight: 600; text-align: left;">Note</h4>
+      <h5><small style="font-weight: 400;text-align: left">Entre</small></h5>
+      <span style="color: #ccac00;">
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star-o" style="margin-right: 5px"></i>
+        <i class="fa fa-star-o" style="margin-right: 5px"></i>
+        <i class="fa fa-star-o" style="margin-right: 5px"></i>
+      </span>
+      <h5><small style="font-weight: 400;text-align: left">Et</small></h5>
+      <span style="color: #ccac00;">
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+        <i class="fa fa-star" style="margin-right: 5px"></i>
+      </span>
+    </div>
+  </div>
+</div>

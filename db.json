@@ -1,0 +1,119 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "name": "SmartphoneMoussa",
+      "price": 43,
+      "quantity": 345,
+      "selected": true,
+      "available": false
+    },
+    {
+      "id": 4,
+      "name": "Computer",
+      "price": 43,
+      "quantity": 344,
+      "selected": false,
+      "available": false
+    },
+    {
+      "name": "ioe",
+      "price": 0,
+      "quantity": 0,
+      "selected": false,
+      "available": true,
+      "id": 5
+    },
+    {
+      "name": "ioe",
+      "price": 0,
+      "quantity": 0,
+      "selected": false,
+      "available": true,
+      "id": 6
+    }
+  ],
+  "resto": [
+    {
+      "id": 1,
+      "name": "Salades japonaises",
+      "price": 1000,
+      "categories": "entree",
+      "regime": "bio",
+      "note": 2,
+      "imgName": "Salade_Japonaise.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Avocado toasts",
+      "price": 1500,
+      "categories": "salade",
+      "regime": "vegetarien",
+      "note": 5,
+      "imgName": "avocado_toast.jpg"
+    },
+    {
+      "name": "Cocktail Bora Bora",
+      "price": 700,
+      "categories": "boisson",
+      "regime": "vegan",
+      "id": 3,
+      "note": 4,
+      "imgName": "cocktail_bora_sans_alcool.jpg"
+    },
+    {
+      "name": "Caviar d'aubergine facile",
+      "price": 1500,
+      "categories": "platsresistace",
+      "regime": "sansGluten",
+      "id": 4,
+      "note": 3,
+      "imgName": "caviar_aubergine.jpg"
+    },
+    {
+      "name": "Mini Club Sandwidichs",
+      "price": 1000,
+      "categories": "dessert",
+      "regime": "vegan",
+      "id": 5,
+      "note": 1,
+      "imgName": "mini_club_sandwichs.jpg"
+    },
+    {
+      "name": "tartare de tomate",
+      "price": 1000,
+      "categories": "resistance",
+      "regime": "sansGluten",
+      "id": 6,
+      "note": 4,
+      "imgName": "tartare_de_tomate.jpg"
+    },
+    {
+      "name": "Roses de pommes feuilltes",
+      "price": 1500,
+      "categories": "resistance",
+      "regime": "vegan",
+      "id": 7,
+      "note": 2,
+      "imgName": "rose_de_pommes_feuilltees.jpg"
+    },
+    {
+      "name": "Brochette de boeuf",
+      "price": 2000,
+      "categories": "resistance",
+      "regime": "vegan",
+      "id": 8,
+      "note": 2,
+      "imgName": "brochette de boeuf.jpg"
+    },
+    {
+      "name": "Mojoto sans alcool",
+      "price": 1000,
+      "categories": "resistance",
+      "regime": "bio",
+      "id": 9,
+      "note": 2,
+      "imgName": "mojito_sans_alcool.jpg"
+    }
+  ]
+}

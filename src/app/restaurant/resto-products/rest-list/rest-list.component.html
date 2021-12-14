@@ -1,0 +1,79 @@
+<div class="Rectangle">
+  <div class="row" style="background-color: #FFFFFF;margin: 0;padding: 0 15px;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 "
+         style="border-top: 3px;border-left: 0;border-bottom: 0;border-right: 0;border-color: #e7e7e7;border-style: solid;
+  padding: 15px  0 0 0;">
+      <form class="MonForm" #f="ngForm"> <!-- utiliser keypress ou change-->
+        <input class="form-control me-2 inputForm" style="width: 100%;padding: 5px 20px;"
+               (keyup)="onSearch(recherche.value)"
+               #recherche name="keyword" type="text" placeholder="  Rechercher">
+        <button type="reset" class="btn reset" (click)="onGetAllProductsResto()"><i class="fa fa-times"></i></button>
+      </form>
+    </div>
+  </div>
+  {{recherche.value}}
+
+  <div class="classMenuProduct" id="idMenuProduct" style="padding: 10px;" *ngIf="(productsInput$ | async) as result">
+    <div class="icon">
+      <div style="display: flex;justify-content: space-between;align-items: center">
+        <span><strong>Afficher le menu</strong></span>
+        <button class="btn MenuNav" (click)="dropDownMenuProduct()">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="nav-resto">
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_ALL_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetAllProductsResto()" style="margin-left: 5px">All
+      </button>
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_ENTREES_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetEntreesProducts()" style="margin-left: 5px;">Entrees
+      </button>
+
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_SALADES_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetSaladesProducts()" style="margin-left: 5px;">Salades
+      </button>
+
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetPlatsResistancesProducts()" style="margin-left: 5px;">Plats de resistance
+      </button>
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_DESSERTS_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetDessertsProducts()" style="margin-left: 5px;">Desserts
+      </button>
+      <button class="btn MenuNav"
+              [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_BOISSONS_PRODUCTS?'activeButtonMenu':''"
+              (click)="onGetBoissonsProducts()" style="margin-left: 5px;">Boissons
+      </button>
+    </div>
+  </div>
+
+  <div class="row" style="margin: 0;">
+    <!--
+      Colonne Filtres
+    -->
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+      <app-rest-list-filtre [productsInput$]="productsInput$" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list-filtre>
+
+    </div>
+
+
+    <!-- Colonne Product-->
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-8" style="padding: 0;">
+      <!-- Affichage des donnees-->
+      <div class="container-fluid">
+        <app-rest-list-items [productsInput$]="productsInput$"></app-rest-list-items>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

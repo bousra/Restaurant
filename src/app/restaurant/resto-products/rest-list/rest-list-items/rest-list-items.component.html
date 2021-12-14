@@ -1,0 +1,31 @@
+<ng-container *ngIf="(productsInput$ | async) as result" [ngSwitch]="result.dataState">
+  <ng-container *ngSwitchCase="DataStateEnumResto.LOADING" >
+    <i class="fa fa-refresh fa-spin" style="font-size:30px;"></i>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnumResto .ERROR">
+    <div class="alert-danger">
+      {{result.errorMessage}}</div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnumResto.LOADED">
+    <div class="row">
+
+      <h4 [ngSwitch]="result.actionTypes" style="font-weight: 600;">
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_ALL_PRODUCTS">Tous les produits</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_SALADES_PRODUCTS">Les Salades</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_BOISSONS_PRODUCTS">Les Boissons</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS">Les Resistants</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_DESSERTS_PRODUCTS">Les Desserts</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_ENTREES_PRODUCTS">Les Entrees</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.SEARCH_PRODUCTS">Les résultats de la recherche</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS">Les Sans gluten</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS">Les VEGETARIENS</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_BIO_PRODUCTS">Les bioS</span>
+        <span *ngSwitchCase="ProductActionsTypesResto.GET_VEGAN_PRODUCTS">les vegans</span>
+      </h4>
+      <!-- Affichage des items-->
+      <div *ngFor="let p of result.data " class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+        <app-rest-item [productItem]="p"></app-rest-item>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

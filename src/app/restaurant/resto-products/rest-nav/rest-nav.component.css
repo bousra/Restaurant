@@ -1,0 +1,80 @@
+.Demandes-spciales {
+  font-family: SFPro;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: capitalize;
+}
+.Ma-commande-0-FCFA {
+  font-family: SFPro;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #000;
+}
+
+.Notifications {
+  font-family: SFPro;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+.Menu {
+  font-family: SFPro;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+.MenuNav:hover{
+  background-color: #cb674e!important;
+  color: #FFFFFF!important;
+}
+.activeButtonNav{
+  color: #cb674e!important;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 5px;
+  border-top: 0;
+  border-style: solid;
+  border-color: #cb674e;
+  padding: 10px 0.3em;
+}
+.LOGO-NOM {
+  margin: 0 6.5px 12.5px 18px;
+  font-family: SFPro;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #cb674e;
+}
+.Rectangle {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 11.5px 0 0;
+  /*border: solid 0.5px #eaedf7;*/
+}
+.Trac-21 {
+  height: 0;
+  margin: 12.5px 0 0;
+  border: solid 0.3px #e7e7e7;
+}
+.navHeader{
+  padding: 6.4px 15px 0 54.8px;
+}
