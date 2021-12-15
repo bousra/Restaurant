@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Restaurant} from '../../../../../../model/resto.model';
+import {ActivatedRoute} from '@angular/router';
+import {RestoService} from '../../../../../../services/resto.service';
 
 @Component({
   selector: 'app-view-item',
@@ -7,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() product: Restaurant | null = null;
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

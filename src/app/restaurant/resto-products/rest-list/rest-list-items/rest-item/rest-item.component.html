@@ -1,43 +1,34 @@
-<div *ngIf="productItem" data-toggle="modal" data-target="#myModal"
-     style="margin:5px;padding:5px;cursor:pointer;background-color: #e7e7e7;
+
+<div class="content-list" *ngIf="productItem" >
+  <div data-toggle="modal" data-target="#myModal" (click)="onGetProductItem(productItem)"
+       style="margin:5px;padding:5px;cursor:pointer;background-color: #e7e7e7;
      height: 120px;border-radius: 5px;border-style: solid;border-color: #e7e7e7;display: flex;flex-direction: row;">
 
-  <div>
-    <img [src]='BaseLinkImg+productItem.imgName'
-         style="height:90px; width:90px;border-radius: 5px;border: solid 1px #cb674e;">
-  </div>
-  <div style="padding: 0 0 0 10px;text-align: left;">
-    <h5 style="margin-top:0;color: #cb674e;text-transform: capitalize;">{{productItem.name}}</h5>
-    <h5 style="margin-top: 0;"><i class="fa fa-money" aria-hidden="true"
-                                  style="color: #cb674e;margin-right: 5px;"></i>{{productItem.price}} <span
-      style="text-transform: uppercase">fcfa</span></h5>
-    <span id="starNumber" style="color: #ccac00;">
+    <div>
+      <img [src]='BaseLinkImg+productItem.imgName'
+           style="height:90px; width:90px;border-radius: 5px;border: solid 1px #cb674e;">
+    </div>
+    <div style="padding: 0 0 0 10px;text-align: left;">
+      <h5 style="margin-top:0;color: #cb674e;text-transform: capitalize;">{{productItem.name}}</h5>
+      <h5 style="margin-top: 0;"><i class="fa fa-money" aria-hidden="true"
+                                    style="color: #cb674e;margin-right: 5px;"></i>{{productItem.price}} <span
+        style="text-transform: uppercase">fcfa</span></h5>
+      <span id="starNumber" style="color: #ccac00;">
                     <i class="fa fa-star" style="margin-right: 5px"></i>
                     <i class="fa fa-star" style="margin-right: 5px"></i>
                     <i class="fa fa-star" style="margin-right: 5px"></i>
                     <i class="fa fa-star" style="margin-right: 5px"></i>
                     <i class="fa fa-star-o" style="margin-right: 5px"></i>
                   </span>
-  </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">A modifier</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
+
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <app-view-item [product]="product"> </app-view-item>
+  </div>
+
+
 </div>
+

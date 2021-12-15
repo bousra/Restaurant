@@ -12,10 +12,11 @@ export enum ProductActionsTypesResto {
   GET_DESSERTS_PRODUCTS = '[Product] Get Dessert Products',
   GET_BOISSONS_PRODUCTS = '[Product] Get Boisson Products',
   SEARCH_PRODUCTS = '[Product] Search Products',
-  GET_BIO_PRODUCTS ='[Product] Get Bio Products',
-  GET_VEGAN_PRODUCTS ='[Product] Get Vegan Products',
-  GET_VEGETARIEN_PRODUCTS ='[Product] Get Végétarien Products',
-  GET_SANS_GLUTEN_PRODUCTS ='[Product] Get Sans Gluten Products'
+  GET_BIO_PRODUCTS = '[Product] Get Bio Products',
+  GET_VEGAN_PRODUCTS = '[Product] Get Vegan Products',
+  GET_VEGETARIEN_PRODUCTS = '[Product] Get Végétarien Products',
+  GET_SANS_GLUTEN_PRODUCTS = '[Product] Get Sans Gluten Products',
+  GET_PRODUCT = '[Product] Get Product'
 }
 
 export interface ActionEventResto{

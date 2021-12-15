@@ -1,6 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppDataStateResto, DataStateEnumResto, ProductActionsTypesResto} from '../../../../State/resto.state';
+import {
+  ActionEventResto,
+  AppDataStateResto,
+  DataStateEnumResto,
+  ProductActionsTypesResto
+} from '../../../../State/resto.state';
 import {Restaurant} from '../../../../model/resto.model';
 
 
@@ -10,6 +15,7 @@ import {Restaurant} from '../../../../model/resto.model';
   styleUrls: ['./rest-list-items.component.css']
 })
 export class RestListItemsComponent implements OnInit {
+  @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
   readonly DataStateEnumResto = DataStateEnumResto;
   readonly ProductActionsTypesResto = ProductActionsTypesResto;
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
@@ -17,6 +23,10 @@ export class RestListItemsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  // tslint:disable-next-line:typedef
+  onActionEvent($event: ActionEventResto){
+    this.productRestoEventEmitter.emit($event);
   }
 
 }

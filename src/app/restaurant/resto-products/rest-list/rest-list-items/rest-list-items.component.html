@@ -23,8 +23,10 @@
         <span *ngSwitchCase="ProductActionsTypesResto.GET_VEGAN_PRODUCTS">les vegans</span>
       </h4>
       <!-- Affichage des items-->
+      {{result.data | json}}
       <div *ngFor="let p of result.data " class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-        <app-rest-item [productItem]="p"></app-rest-item>
+
+        <app-rest-item [productItem]="p" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-item>
       </div>
     </div>
   </ng-container>

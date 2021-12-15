@@ -17,7 +17,7 @@ export class RestoProductsComponent implements OnInit {
   @Output() productResto$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
   readonly DataStateEnumResto = DataStateEnumResto;
 
-  constructor(private serviceResto: RestoService) {
+  constructor(private serviceResto: RestoService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -139,6 +139,10 @@ export class RestoProductsComponent implements OnInit {
       case(ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
         this.onGetSansGlutenProducts();
         break;
+        break;
+      case(ProductActionsTypesResto.GET_PRODUCT):
+        this.onGetProduct($event.payload);
+        break;
     }
   }
 
@@ -184,5 +188,10 @@ export class RestoProductsComponent implements OnInit {
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
     );
+  }
+
+  // tslint:disable-next-line:typedef
+  private onGetProduct(product: Restaurant) {
+    this.router.navigateByUrl('rest-item/' + product.id);
   }
 }
