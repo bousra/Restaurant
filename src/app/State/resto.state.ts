@@ -23,7 +23,7 @@ export interface ActionEventResto{
   type: ProductActionsTypesResto;
   payload?: any;
 }
-export interface AppDataStateResto<T> {
+export interface  AppDataStateResto<T> {
   dataState?: DataStateEnumResto;
   data?: T;
   errorMessage?: string;

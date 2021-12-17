@@ -1,0 +1,100 @@
+.Salade-japonaise {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #cb674e;
+  margin-top: 0;
+}
+
+
+.ingredients{
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+.quantite{
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.supplements{
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #cb674e;
+}
+#border-body{
+  border-right: 0; border-left: 0;border-bottom: 0;border-top: 0; border-color: #eee;border-style: solid;
+}
+#supp{
+  border-right: 0; border-left: 3px;border-bottom: 0;border-top: 0; border-color: #eee;border-style: solid;
+}
+
+.modal-footer{
+  padding: 0 40px 15px ;
+}
+.ingredient{
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  text-transform: capitalize;
+}
+.btn-danger{
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.note{
+  border-right: 0; border-left: 0;border-bottom: 0;border-top: 0; border-color: #707070;border-style: solid;
+  text-align: center;
+}
+#iqd{
+  margin-left:auto;
+}
+@media only screen and (max-width: 767px) {
+  #iqd{
+    margin-right: auto;
+    margin-left: 0!important;
+  }
+  #border-body{
+    border: 0;
+  }
+  .note{
+    border: 0;
+    text-align: left;
+  }
+  .modal-footer{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0 15px;
+  }
+  #supp{
+    border: 0;
+  }
+  .notejs.mobileResponsive{
+    text-align: center;
+  }
+
+}
+
+

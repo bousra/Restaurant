@@ -16,21 +16,30 @@ export class RestItemComponent implements OnInit {
   @Input() productItem: Restaurant | null = null;
   product: Restaurant | null = null;
   constructor(private activatedRoute: ActivatedRoute, private restoService: RestoService) {
-    this.productItemId = this.activatedRoute.snapshot.params.id;
+    // this.productItemId = this.activatedRoute.snapshot.params.id;
   }
 
 
   ngOnInit(): void {
-    this.restoService.getProduct(this.productItemId).subscribe(data => {
+    /*this.restoService.getProduct(this.productItemId).subscribe(data => {
       console.log(data);
       this.product = data;
-    });
+    });*/
   }
   // tslint:disable-next-line:typedef
   onGetProductItem(product: Restaurant) {
-      this.productRestoEventEmitter.emit({
-        type: ProductActionsTypesResto.GET_PRODUCT,
-        payload: product
-      });
+      // this.productRestoEventEmitter.emit({
+      //   type: ProductActionsTypesResto.GET_PRODUCT,
+      //   payload: product
+      // });
+    this.product = product;
+  }
+
+  getModalName(): string {
+    return  'product' + this.productItem.id;
+  }
+
+  getCallModalName(): string {
+    return '#' + this.getModalName();
   }
 }

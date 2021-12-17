@@ -1,6 +1,6 @@
 
 <div class="content-list" *ngIf="productItem" >
-  <div data-toggle="modal" data-target="#myModal" (click)="onGetProductItem(productItem)"
+  <div data-toggle="modal" data-target="#productView"
        style="margin:5px;padding:5px;cursor:pointer;background-color: #e7e7e7;
      height: 120px;border-radius: 5px;border-style: solid;border-color: #e7e7e7;display: flex;flex-direction: row;">
 
@@ -21,14 +21,6 @@
                     <i class="fa fa-star-o" style="margin-right: 5px"></i>
                   </span>
     </div>
-
   </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <app-view-item [product]="product"> </app-view-item>
-  </div>
-
-
 </div>
 
