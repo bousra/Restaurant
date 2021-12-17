@@ -1,8 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActionEventResto, AppDataStateResto, DataStateEnumResto, ProductActionsTypesResto} from '../../../State/resto.state';
+import {
+  ActionEventResto,
+  AppDataStateResto,
+  DataStateEnumResto,
+  ProductActionsTypesResto
+} from '../../../State/resto.state';
 import {Observable} from 'rxjs';
 import {Restaurant} from '../../../model/resto.model';
-import { Options } from '@angular-slider/ngx-slider';
+import {Options} from '@angular-slider/ngx-slider';
+
 @Component({
   selector: 'app-rest-list',
   templateUrl: './rest-list.component.html',
@@ -142,7 +148,17 @@ export class RestListComponent implements OnInit {
       case(ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
         this.onGetSansGlutenProducts();
         break;
+      case(ProductActionsTypesResto.GET_PRODUCT):
+        this.onGetProduct($event.payload);
+        break;
     }
   }
 
+  // tslint:disable-next-line:typedef
+  private onGetProduct(product: Restaurant) {
+    this.productRestoEventEmitter.emit({
+      type: ProductActionsTypesResto.GET_PRODUCT,
+      payload: product
+    });
+  }
 }

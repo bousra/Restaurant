@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {RestListComponent} from './restaurant/resto-products/rest-list/rest-list.component';
 import {RestoProductsComponent} from './restaurant/resto-products/resto-products.component';
+import {ViewItemComponent} from './restaurant/resto-products/rest-list/rest-list-items/rest-item/view-item/view-item.component';
 
 const routes: Routes = [
   {path: 'restaurant-products', component: RestoProductsComponent},
+  {path: 'rest-item/:id', component: RestoProductsComponent},
   {path: 'restaurant-list', component: RestListComponent},
+  {path: 'view-item/:id', component: ViewItemComponent},
 ];
 
 @NgModule({

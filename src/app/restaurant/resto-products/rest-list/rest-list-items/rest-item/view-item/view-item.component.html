@@ -1,1 +1,175 @@
-<p>view-item works!</p>
+<div class="modal-dialog modal-lg" role="document" *ngIf="product">
+  <div class="modal-content" style="border: 1px solid #fff;border-radius: 10px;">
+    <div class="modal-header" style="padding: 0;background-color: #FFFFFF;">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title Salade-japonaise" id="myModalLabel" style="border: 0;">{{product.name}}</h4>
+    </div>
+    <div class="modal-body" style="padding: 5px 0 0;">
+      <div class="row">
+        <!-- Colone Information product-->
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-7" id="border-body">
+          <!-- img-ingredient-->
+          <div class="row" style="padding: 5px 0;">
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-6" style="text-align: center;">
+              <img src="{{BaseLinkImg}}/{{product.imgName}}"
+                   style="width:100%;border-radius: 5px;border: solid 1px #cb674e;">
+            </div>
+            {{windowWidth}}
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-6">
+              <div style="margin: 0 1px;">
+                <h4 class="ingredients" style="text-transform: capitalize;margin-top: 0;">ingr&eacute;dients</h4>
+                <p>Ci dessous les ingredients</p>
+              </div>
+
+
+            </div>
+          </div>
+          <!-- quantite-->
+          <div style="padding: 5px 0;" id="quantite">
+            <div class="row" id="quantityIncrementDecrease">
+              <div class="col-xs-6 col-sm-5 col-md-5 col-lg-6"
+                   style="display: inline-flex;height:50px;align-items: center;">
+                <div class="quantite hidden-xs hidden-sm ">Quantit&eacute;</div>
+                <div id="iqd"
+                     style="display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                  <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
+                          (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                  <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
+                         [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
+                  <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-7 col-lg-6"
+                   style="height:50px;position: relative;overflow: hidden;display: flex;align-items: center;">
+                <div style=""><small class="quantite">total:</small></div>
+                <div class="" style="margin-left:auto;display: flex;">
+                  <input type="text"
+                         style="text-align:center;background-color:#FFFFFF;font-size:16px;border: none;width:50px;font-weight: 900;"
+                         disabled [value]="value()">
+                  <small style="font-weight: bold;align-self:start;text-transform:uppercase;">fcfa</small>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+
+             </div>-->
+            <div class="row note notejs hidden-xs" id="notejs">
+              <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <hr style="margin: 10px 0;border-top: 3px solid #eee">
+                <h4>
+                  <span style="font-weight:600;text-transform: capitalize;margin: 0 10px;">note :</span>
+                  <span id="starNumber" style="color: #ccac00;">
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                  </span>
+                  <span style="font-weight:600;margin: 0 10px;">10 avis</span>
+                </h4>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Colonne Supplements -->
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-5" id="supp">
+          <div style="margin: 0">
+            <!-- Modal -->
+
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default" style="border: 0;">
+                <div class="panel-heading" style="padding:5px 0;background-color: #FFFFFF">
+                  <div class="panel-title" style="position: relative;overflow: hidden;">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="text-decoration: none;">
+                      <span class="supplements">suppl&eacute;ments</span>
+                    </a>
+
+                    <div class="hidden-sm hidden-md hidden-lg" style="float: right; display: flex;">
+                      <input type="text"
+                             style="text-align:center;background-color:#FFFFFF;border: none;width:50px;font-weight: bold;"
+                             disabled [value]="totalSupplements">
+                      <small style="font-weight: bold;align-self:start;text-transform:uppercase;">fcfa</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                  <div class="panel-body" style="border: 0;padding:0 0 5px;">
+                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                           style="display: inline-flex;align-items: center;">
+                        <div class="ingredient">{{ingredient.name}}</div>
+                        <div
+                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
+                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                          <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
+                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
+                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Commentaires-->
+              <div class="panel panel-default" style="border: 0;">
+                <div class="panel-heading" style="padding:5px 0;background-color: #FFFFFF">
+                  <div class="panel-title">
+                    <span class="supplements" data-toggle="collapse" data-parent="#accordion" data-target="#collapse2 ">
+                      Appuyer pour ajouter un commentaire
+                    </span>
+                  </div>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                  <div class="panel-body" style="border: 0;padding:0;">
+                    <p>Aucun un commentaire</p>
+                    <textarea style="width: 100%;height: 100px;"></textarea>
+                  </div>
+                  <h4 style="text-align: left; "><a type="button" class="btn"
+                                                    style="font-weight: 900;text-decoration: none;color: #0b0b0b;">Ajouter
+                    un commentaire</a></h4>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- fin commentaire -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="text-align:center;background-color: #FFFFFF;">
+      <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      <div class="row note notejs hidden-md hidden-sm hidden-lg">
+        <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <hr style="margin: 10px 0;border-top: 3px solid #eee">
+          <h4>
+            <span style="font-weight:600;text-transform: capitalize;margin: 0 10px;">note :</span>
+            <span style="color: #ccac00;">
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                    <i class="fa fa-star" style="margin-right: 5px"></i>
+                  </span>
+            <span style="font-weight:600;margin: 0 10px;">10 avis</span>
+          </h4>
+        </div>
+      </div>
+      <div class="row note" id="noteAjouterCommande">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="boutonAjouterCommande">
+          <button type="button" class="btn btn-danger" style="width: 100%;">Ajouter</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
