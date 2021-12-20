@@ -114,6 +114,54 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                           style="display: inline-flex;align-items: center;">
+                        <div class="ingredient">{{ingredient.name}}</div>
+                        <div
+                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
+                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                          <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
+                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
+                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                           style="display: inline-flex;align-items: center;">
+                        <div class="ingredient">{{ingredient.name}}</div>
+                        <div
+                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
+                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                          <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
+                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
+                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                           style="display: inline-flex;align-items: center;">
+                        <div class="ingredient">{{ingredient.name}}</div>
+                        <div
+                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
+                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                          <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
+                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
+                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

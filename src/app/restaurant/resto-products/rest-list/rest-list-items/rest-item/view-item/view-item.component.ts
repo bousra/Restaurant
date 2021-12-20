@@ -10,7 +10,13 @@ export class ViewItemComponent implements OnInit {
 @Input() product: Restaurant | null ;
   BaseLinkImg = 'assets/images/restaurant/';
   quantiteProduct = 1;
+  quantiteIngredientUn = 1;
+  quantiteIngredientDeux = 1;
+  quantiteIngredientTrois = 1;
+  quantiteIngredientQuatre = 1;
   multiProduct = 0 ;
+  decreaseIngredient = '';
+  increaseIngredient = '';
   totalSupplements = 0;
   note: HTMLElement |  null;
   boutonAjouterCommande: HTMLElement | null;
@@ -41,32 +47,46 @@ export class ViewItemComponent implements OnInit {
   decreaseQuantity(): void {
     this.quantiteProduct++;
     this.multiProduct = this.product.price * this.quantiteProduct;
-    this.changePositionNote();
   }
 
   increaseQuantity(): void {
     this.quantiteProduct--;
     this.multiProduct = this.product.price * this.quantiteProduct;
-    this.changePositionNote();
 
   }
 
-  changePositionNote(): void{
-    this.note = document.getElementById('notejs');
-    this.boutonAjouterCommande = document.getElementById('boutonAjouterCommande');
-    this.noteAjouterCommande = document.getElementById('noteAjouterCommande');
-    this.quantity = document.getElementById('quantite');
-    this.windowWidth = window.innerWidth;
-    if (this.windowWidth < 767) {
-      this.noteAjouterCommande.insertBefore(this.note, this.boutonAjouterCommande);
-    }
-    else {
-      this.quantity.appendChild(this.note);
-    }
-
+  descreaseQuantiteIngredientUn(): void{
+this.quantiteIngredientUn--;
   }
-
+increaseQuantiteIngredientUn(): void{
+  this.quantiteIngredientUn++;
+}
+  descreaseQuantiteIngredientDeux(): void{
+    this.quantiteIngredientDeux--;
+  }
+  increaseQuantiteIngredientDeux(): void{
+    this.quantiteIngredientDeux++;
+  }
+  descreaseQuantiteIngredientTrois(): void{
+    this.quantiteIngredientTrois--;
+  }
+  increaseQuantiteIngredientTrois(): void{
+    this.quantiteIngredientTrois++;
+  }
+  descreaseQuantiteIngredientQuatre(): void{
+    this.quantiteIngredientQuatre--;
+  }
+  increaseQuantiteIngredientQuatre(): void{
+    this.quantiteIngredientQuatre++;
+  }
   value(): number {
     return this.quantiteProduct * this.product.price ;
+  }
+  valueTotalSupplements(): number{
+    this.totalSupplements = this.quantiteIngredientUn *this.product.price;
+    this.totalSupplements += this.quantiteIngredientDeux * this.product.price;
+    this.totalSupplements += this.quantiteIngredientTrois * this.product.price;
+    this.totalSupplements += this.quantiteIngredientQuatre * this.product.price;
+    return this.totalSupplements;
   }
 }
