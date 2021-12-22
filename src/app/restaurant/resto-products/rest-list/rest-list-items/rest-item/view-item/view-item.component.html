@@ -1,5 +1,5 @@
 <div class="modal-dialog modal-lg" role="document" *ngIf="product">
-  <div class="modal-content" style="border: 1px solid #fff;border-radius: 10px;">
+  <div class="modal-content" style="border: 1px solid #fff;border-radius: 10px;padding-top: 1px;">
     <div class="modal-header" style="padding: 0;background-color: #FFFFFF;">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
         aria-hidden="true">&times;</span></button>
@@ -33,12 +33,12 @@
                 <div class="quantite hidden-xs hidden-sm ">Quantit&eacute;</div>
                 <div id="iqd"
                      style="display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
-                  <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
-                          (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
+                  <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=0? '':null"
+                          (click)="decreaseQuantity()"><i class="fa fa-minus"></i></button>
                   <input type="text" style="background-color: #fff;border-radius: 5px;
                 border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
                          [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
-                  <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i></button>
+                  <button class="btn btn-danger btn-sm" (click)="increaseQuantity()"><i class="fa fa-plus"></i></button>
                 </div>
               </div>
               <div class="col-xs-6 col-sm-6 col-md-7 col-lg-6"
@@ -91,7 +91,7 @@
                     <div class="hidden-sm hidden-md hidden-lg" style="float: right; display: flex;">
                       <input type="text"
                              style="text-align:center;background-color:#FFFFFF;border: none;width:50px;font-weight: bold;"
-                             disabled [value]="totalSupplements">
+                             disabled [value]="totalSupp">
                       <small style="font-weight: bold;align-self:start;text-transform:uppercase;">fcfa</small>
                     </div>
                   </div>
@@ -101,65 +101,26 @@
                     <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
                            style="display: inline-flex;align-items: center;">
-                        <div class="ingredient">{{ingredient.name}}</div>
-                        <div
-                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
-                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
-                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
-                          <input type="text" style="background-color: #fff;border-radius: 5px;
+                        <div class="ingredient">{{ingredient.nom}}</div>
+                        <div style="margin-left:auto;display: inline-flex;">
+                          <div style="background-color: #FFFFFF;">
+                            <input type="text" style="background-color: #fff;border-radius: 5px;
+                border: solid 1px #fff;width: 50px;text-align: center;font-weight: bold;" disabled
+                                   [value]="'&#x2b;'+ingredient.total">
+                          </div>
+                          <div
+                            style="display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
+                            <button class="btn btn-danger btn-sm" [attr.disabled]="ingredient.quantite<=0? '':null"
+                                    (click)="decrease(ingredient)">
+                              <i class="fa fa-minus"></i></button>
+                            <input type="text" style="background-color: #fff;border-radius: 5px;
                 border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
-                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
-                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
-                          </button>
+                                   [value]="ingredient.quantite" [(ngModel)]="ingredient.quantite">
+                            <button class="btn btn-danger btn-sm" (click)="increase(ingredient)"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                           style="display: inline-flex;align-items: center;">
-                        <div class="ingredient">{{ingredient.name}}</div>
-                        <div
-                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
-                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
-                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
-                          <input type="text" style="background-color: #fff;border-radius: 5px;
-                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
-                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
-                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                           style="display: inline-flex;align-items: center;">
-                        <div class="ingredient">{{ingredient.name}}</div>
-                        <div
-                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
-                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
-                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
-                          <input type="text" style="background-color: #fff;border-radius: 5px;
-                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
-                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
-                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row" style="padding: 5px 0;" *ngFor="let ingredient of ingredients">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                           style="display: inline-flex;align-items: center;">
-                        <div class="ingredient">{{ingredient.name}}</div>
-                        <div
-                          style="margin-left:auto;display: inline-flex;background-color: #c9302c;border-radius: 5px;border: solid 1px #c9302c;align-items: center;">
-                          <button class="btn btn-danger btn-sm" [attr.disabled]="quantiteProduct<=1? '':null"
-                                  (click)="increaseQuantity()"><i class="fa fa-minus"></i></button>
-                          <input type="text" style="background-color: #fff;border-radius: 5px;
-                border: solid 1px #fff;width: 20px;text-align: center;font-weight: bold;" disabled
-                                 [value]="quantiteProduct" [(ngModel)]="quantiteProduct">
-                          <button class="btn btn-danger btn-sm" (click)="decreaseQuantity()"><i class="fa fa-plus"></i>
-                          </button>
-                        </div>
+
                       </div>
                     </div>
                   </div>

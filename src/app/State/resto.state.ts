@@ -29,3 +29,4 @@ export interface  AppDataStateResto<T> {
   errorMessage?: string;
   actionTypes?: ProductActionsTypesResto;
 }
+

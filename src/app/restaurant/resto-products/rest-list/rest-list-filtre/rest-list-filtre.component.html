@@ -1,12 +1,12 @@
 <div>
   <div>
-    <h4 style="color: #cb674e;font-weight: 600;text-align: left">Filtres</h4>
+    <h4 style="color: #cb674e;font-weight: 600;text-align: left" data-toggle="collapse" data-target="#collapse1">Filtres</h4>
   </div>
   <!--
   npm i @angular-slider/ngx-slider
   https://angular-slider.github.io/ngx-slider/docs
   -->
-  <div class="filter-content">
+  <div class="filter-content panel-collapse collapse in" id="collapse1">
     <!-- <intervalle de prix-->
     <div>
       <h4 style="font-weight: 600;text-align: left">Intervalle de prix</h4>
@@ -43,24 +43,37 @@
         </div>
       </div>
     </div>
-    <div>
-      <h4 style="font-weight: 600; text-align: left;">Note</h4>
-      <h5><small style="font-weight: 400;text-align: left">Entre</small></h5>
-      <span style="color: #ccac00;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h4 style="font-weight: 600; text-align: left;">Note</h4>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
+            <h5><small style="font-weight: 400;text-align: left">Entre</small></h5>
+            <span style="color: #ccac00;">
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star-o" style="margin-right: 5px"></i>
         <i class="fa fa-star-o" style="margin-right: 5px"></i>
         <i class="fa fa-star-o" style="margin-right: 5px"></i>
       </span>
-      <h5><small style="font-weight: 400;text-align: left">Et</small></h5>
-      <span style="color: #ccac00;">
+          </div>
+          <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
+            <h5><small style="font-weight: 400;text-align: left">Et</small></h5>
+            <span style="color: #ccac00;">
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star" style="margin-right: 5px"></i>
         <i class="fa fa-star" style="margin-right: 5px"></i>
       </span>
+        </div>
+
+
+      </div>
+      </div>
+
     </div>
   </div>
 </div>
