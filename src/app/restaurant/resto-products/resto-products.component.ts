@@ -1,6 +1,11 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {ActionEventResto, AppDataStateResto, DataStateEnumResto, ProductActionsTypesResto} from '../../State/resto.state';
+import {
+  ActionEventResto,
+  AppDataStateResto,
+  DataStateEnumResto, EventProductActionsTypesResto,
+  ProductActionsTypesResto
+} from '../../State/resto.state';
 import {Restaurant} from '../../model/resto.model';
 import {RestoService} from '../../services/resto.service';
 import {Router} from '@angular/router';
@@ -27,7 +32,12 @@ export class RestoProductsComponent implements OnInit {
   onGetAllProducts() {
     this.productResto$ = this.serviceResto.getAllProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS,
+          eventActionType: EventProductActionsTypesResto
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -38,7 +48,11 @@ export class RestoProductsComponent implements OnInit {
   onGetEntreesProducts() {
     this.productResto$ = this.serviceResto.getEntreesProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_ENTREES_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_ENTREES_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -49,7 +63,11 @@ export class RestoProductsComponent implements OnInit {
   onGetDessertProducts() {
     this.productResto$ = this.serviceResto.getDessertProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_DESSERTS_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_DESSERTS_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -60,7 +78,11 @@ export class RestoProductsComponent implements OnInit {
   onGetSaladesProducts() {
     this.productResto$ = this.serviceResto.getSaladesProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_SALADES_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_SALADES_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -71,7 +93,11 @@ export class RestoProductsComponent implements OnInit {
   onGetResistanceProducts() {
     this.productResto$ = this.serviceResto.getResistanceProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -82,7 +108,11 @@ export class RestoProductsComponent implements OnInit {
   onGetBoissonsProducts() {
     this.productResto$ = this.serviceResto.getBoissonProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_BOISSONS_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_BOISSONS_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -107,36 +137,36 @@ export class RestoProductsComponent implements OnInit {
   onActionEvent($event: ActionEventResto) {
     switch ($event.type) {
       case(ProductActionsTypesResto.GET_ALL_PRODUCTS):
-        this.onGetAllProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);
         break;
       case(ProductActionsTypesResto.GET_ENTREES_PRODUCTS):
-        this.onGetEntreesProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_ENTREES_PRODUCTS);
         break;
       case(ProductActionsTypesResto.GET_DESSERTS_PRODUCTS):
-        this.onGetDessertProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_DESSERTS_PRODUCTS);
         break;
       case(ProductActionsTypesResto.SEARCH_PRODUCTS):
         this.onSearch($event.payload);
         break;
       case(ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS):
-        this.onGetResistanceProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS);
         break;
       case(ProductActionsTypesResto.GET_BOISSONS_PRODUCTS):
-        this.onGetBoissonsProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_BOISSONS_PRODUCTS);
         break;
       case(ProductActionsTypesResto.GET_SALADES_PRODUCTS):
-        this.onGetSaladesProducts();
+        this.onGetProductCustom(ProductActionsTypesResto.GET_SALADES_PRODUCTS);
         break;
-      case(ProductActionsTypesResto.GET_BIO_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
         this.onGetBioProducts();
         break;
-      case(ProductActionsTypesResto.GET_VEGAN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
         this.onGetVeganProducts();
         break;
-      case(ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
         this.onGetVegetarienProducts();
         break;
-      case(ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
         this.onGetSansGlutenProducts();
         break;
         break;
@@ -150,7 +180,8 @@ export class RestoProductsComponent implements OnInit {
   onGetBioProducts() {
     this.productResto$ = this.serviceResto.getBioProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_BIO_PRODUCTS});
+        return ({dataState: DataStateEnumResto.LOADED, data,
+          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS, eventActionTypes: EventProductActionsTypesResto.GET_BIO_PRODUCTS});
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -161,7 +192,8 @@ export class RestoProductsComponent implements OnInit {
   onGetVeganProducts() {
     this.productResto$ = this.serviceResto.getVeganProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_VEGAN_PRODUCTS});
+        return ({dataState: DataStateEnumResto.LOADED, data,
+          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS, eventActionTypes: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS});
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -172,7 +204,12 @@ export class RestoProductsComponent implements OnInit {
   onGetVegetarienProducts() {
     this.productResto$ = this.serviceResto.getVegetarienProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS,
+          eventActionTypes: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -183,7 +220,12 @@ export class RestoProductsComponent implements OnInit {
   onGetSansGlutenProducts() {
     this.productResto$ = this.serviceResto.getSansGlutenProducts().pipe(
       map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS});
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS,
+          eventActionTypes: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
+        });
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
@@ -193,5 +235,20 @@ export class RestoProductsComponent implements OnInit {
   // tslint:disable-next-line:typedef
   private onGetProduct(product: Restaurant) {
     this.router.navigateByUrl('rest-item/' + product.id);
+  }
+
+  onGetProductCustom(actionType: ProductActionsTypesResto): void {
+    this.productResto$ = this.serviceResto.getCustum('resto', '', '').pipe(
+      map(data => {
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data,
+          actionTypes: actionType,
+          // eventActionType: EventProductActionsTypesResto
+        });
+      }),
+      startWith({dataState: DataStateEnumResto.LOADING}),
+      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
+    );
   }
 }

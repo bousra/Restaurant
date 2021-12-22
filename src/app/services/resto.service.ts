@@ -57,8 +57,20 @@ export class RestoService {
    const host = environment.host;
    return this.http.get<Restaurant[]>(host + '/resto?regime=sansGluten');
   }
-  getProduct(productId: number): Observable<Restaurant>{
+  getProduct(tableName: string, attributName?: string, productId?: number): Observable<Restaurant>{
     const host = environment.host;
-    return this.http.get<Restaurant>(host + '/resto/' + productId);
+    return this.http.get<Restaurant>(host + '/' + tableName + '/' + productId);
+  }
+  getCustum(tableName: string, attributName: string, wordGetName: string): Observable<Restaurant[]>{
+    const host = environment.host;
+    if (tableName){
+      return this.http.get<Restaurant[]>(host + '/' + tableName );
+    }
+    else if (tableName && attributName) {
+    return this.http.get<Restaurant[]>(host + '/' + tableName + '/' + attributName);
+ }
+    else if (tableName && attributName && wordGetName){
+      return this.http.get<Restaurant[]>(host + '/' + tableName + '/' + attributName + '=' + wordGetName);
+    }
   }
 }

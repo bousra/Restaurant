@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   ActionEventResto,
   AppDataStateResto,
-  DataStateEnumResto,
+  DataStateEnumResto, EventProductActionsTypesResto,
   ProductActionsTypesResto
 } from '../../../State/resto.state';
 import {Observable} from 'rxjs';
@@ -111,41 +111,41 @@ export class RestListComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetBioProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_BIO_PRODUCTS
+      type: EventProductActionsTypesResto.GET_BIO_PRODUCTS
     });
   }
 // tslint:disable-next-line:typedef
   onGetVeganProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_VEGAN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS
     });
   }
   // tslint:disable-next-line:typedef
   onGetSansGlutenProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
     });
   }
   // tslint:disable-next-line:typedef
   onGetVegetarienProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
     });
   }
   // tslint:disable-next-line:typedef
   onActionEvent($event: ActionEventResto) {
     console.log($event.type);
     switch ($event.type) {
-      case(ProductActionsTypesResto.GET_BIO_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
         this.onGetBioProducts();
         break;
-      case(ProductActionsTypesResto.GET_VEGAN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
         this.onGetVeganProducts();
         break;
-      case(ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
         this.onGetVegetarienProducts();
         break;
-      case(ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
+      case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
         this.onGetSansGlutenProducts();
         break;
       case(ProductActionsTypesResto.GET_PRODUCT):
