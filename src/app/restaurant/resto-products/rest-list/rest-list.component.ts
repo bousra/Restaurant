@@ -161,4 +161,9 @@ export class RestListComponent implements OnInit {
       payload: product
     });
   }
+  onGetProductCustom(productType: ProductActionsTypesResto): void{
+    this.productRestoEventEmitter.emit({
+      type: productType
+    });
+  }
 }
