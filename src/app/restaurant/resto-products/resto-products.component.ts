@@ -19,7 +19,7 @@ import {DataStateEnum} from '../../State/product.state';
 })
 export class RestoProductsComponent implements OnInit {
 
-  @Output() productResto$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
+  @Output() productResto$: Observable<AppDataStateResto<Restaurant[]>> | null = null ;
   readonly DataStateEnumResto = DataStateEnumResto;
 
   constructor(private serviceResto: RestoService, private router: Router) {
