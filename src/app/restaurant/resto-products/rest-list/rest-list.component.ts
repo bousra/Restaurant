@@ -39,7 +39,7 @@ export class RestListComponent implements OnInit {
     }
   };
   ngOnInit(): void {
-    this.onGetAllProductsResto();
+    this.onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);
   }
 
   // tslint:disable-next-line:typedef
@@ -51,52 +51,6 @@ export class RestListComponent implements OnInit {
     });
     return '';
   }
-
-  // tslint:disable-next-line:typedef
-  onGetAllProductsResto() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_ALL_PRODUCTS
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetEntreesProducts() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_ENTREES_PRODUCTS
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetSaladesProducts() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_SALADES_PRODUCTS
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetPlatsResistancesProducts() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS
-    });
-  }
-
-// tslint:disable-next-line:typedef
-  onGetDessertsProducts() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_DESSERTS_PRODUCTS
-    });
-  }
-
-// tslint:disable-next-line:typedef
-  onGetBoissonsProducts() {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_BOISSONS_PRODUCTS
-    });
-  }
-
-  getIdSpan(): HTMLElement | null {
-    return document.getElementById('spanStar');
-  }
   // tslint:disable-next-line:typedef
   dropDownMenuProduct() {
     // const clickedButton = document.getElementById('idMenuProduct');
@@ -107,46 +61,21 @@ export class RestListComponent implements OnInit {
       div.classList.toggle('responsive');
     }
   }
-
-  // tslint:disable-next-line:typedef
-  onGetBioProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_BIO_PRODUCTS
-    });
-  }
-// tslint:disable-next-line:typedef
-  onGetVeganProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS
-    });
-  }
-  // tslint:disable-next-line:typedef
-  onGetSansGlutenProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
-    });
-  }
-  // tslint:disable-next-line:typedef
-  onGetVegetarienProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
-    });
-  }
   // tslint:disable-next-line:typedef
   onActionEvent($event: ActionEventResto) {
     console.log($event.type);
     switch ($event.type) {
       case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
-        this.onGetBioProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_BIO_PRODUCTS);
         break;
       case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
-        this.onGetVeganProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS);
         break;
       case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
-        this.onGetVegetarienProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS);
         break;
       case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
-        this.onGetSansGlutenProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS);
         break;
       case(ProductActionsTypesResto.GET_PRODUCT):
         this.onGetProduct($event.payload);
@@ -161,7 +90,7 @@ export class RestListComponent implements OnInit {
       payload: product
     });
   }
-  onGetProductCustom(productType: ProductActionsTypesResto): void{
+  onGetProductCustom(productType: ProductActionsTypesResto | EventProductActionsTypesResto): void{
     this.productRestoEventEmitter.emit({
       type: productType
     });
