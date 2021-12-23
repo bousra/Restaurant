@@ -1,6 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ActionEventResto, AppDataStateResto, ProductActionsTypesResto} from '../../../../State/resto.state';
+import {
+  ActionEventResto,
+  AppDataStateResto,
+  EventProductActionsTypesResto,
+  ProductActionsTypesResto
+} from '../../../../State/resto.state';
 import {Restaurant} from '../../../../model/resto.model';
 import {Options} from '@angular-slider/ngx-slider';
 @Component({
@@ -12,6 +17,7 @@ export class RestListFiltreComponent implements OnInit {
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
   @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
   readonly ProductActionsTypesResto = ProductActionsTypesResto;
+  readonly EventProductActionsTypesResto = EventProductActionsTypesResto;
 
   starNumber = 0;
   // ngx-slider
@@ -37,25 +43,25 @@ export class RestListFiltreComponent implements OnInit {
 // tslint:disable-next-line:typedef
   onGetBioProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_BIO_PRODUCTS
+      type: EventProductActionsTypesResto.GET_BIO_PRODUCTS
     });
   }
 // tslint:disable-next-line:typedef
   onGetVeganProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_VEGAN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS
     });
   }
   // tslint:disable-next-line:typedef
   onGetSansGlutenProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
     });
   }
   // tslint:disable-next-line:typedef
   onGetVegetarienProducts() {
     this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
+      type: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
     });
   }
 
