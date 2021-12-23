@@ -12,27 +12,6 @@ export class RestoService {
     const host = environment.host;
     return this.http.get<Restaurant[]>(host + '/resto?name_like=' + keyword);
   }
-
-  getBioProducts(): Observable<Restaurant[]> {
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=bio');
-  }
-
-
-  getVeganProducts(): Observable<Restaurant[]> {
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=vegan');
-  }
-
-  getVegetarienProducts(): Observable<Restaurant[]> {
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=vegetarien');
-  }
-
- getSansGlutenProducts(): Observable<Restaurant[]> {
-   const host = environment.host;
-   return this.http.get<Restaurant[]>(host + '/resto?regime=sansGluten');
-  }
   getProduct(tableName: string, attributName?: string, productId?: number): Observable<Restaurant>{
     const host = environment.host;
     return this.http.get<Restaurant>(host + '/' + tableName + '/' + productId);

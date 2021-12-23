@@ -68,16 +68,16 @@ export class RestoProductsComponent implements OnInit {
         this.onGetProductCustom(ProductActionsTypesResto.GET_SALADES_PRODUCTS, this.tableName, 'categories', 'salade');
         break;
       case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
-        this.onGetBioProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_BIO_PRODUCTS, this.tableName, 'regime', 'bio');
         break;
       case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
-        this.onGetVeganProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS, this.tableName, 'regime', 'vegan');
         break;
       case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
-        this.onGetVegetarienProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS, this.tableName, 'regime', 'vegetarien');
         break;
       case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
-        this.onGetSansGlutenProducts();
+        this.onGetProductCustom(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS, this.tableName, 'regime', 'sansGluten');
         break;
         break;
       case(ProductActionsTypesResto.GET_PRODUCT):
@@ -87,67 +87,11 @@ export class RestoProductsComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetBioProducts() {
-    this.productResto$ = this.serviceResto.getBioProducts().pipe(
-      map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data,
-          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS, eventActionTypes: EventProductActionsTypesResto.GET_BIO_PRODUCTS});
-      }),
-      startWith({dataState: DataStateEnumResto.LOADING}),
-      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
-    );
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetVeganProducts() {
-    this.productResto$ = this.serviceResto.getVeganProducts().pipe(
-      map(data => {
-        return ({dataState: DataStateEnumResto.LOADED, data,
-          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS, eventActionTypes: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS});
-      }),
-      startWith({dataState: DataStateEnumResto.LOADING}),
-      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
-    );
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetVegetarienProducts() {
-    this.productResto$ = this.serviceResto.getVegetarienProducts().pipe(
-      map(data => {
-        return ({
-          dataState: DataStateEnumResto.LOADED,
-          data,
-          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS,
-          eventActionTypes: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
-        });
-      }),
-      startWith({dataState: DataStateEnumResto.LOADING}),
-      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
-    );
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetSansGlutenProducts() {
-    this.productResto$ = this.serviceResto.getSansGlutenProducts().pipe(
-      map(data => {
-        return ({
-          dataState: DataStateEnumResto.LOADED,
-          data,
-          actionTypes: ProductActionsTypesResto.GET_ALL_PRODUCTS,
-          eventActionTypes: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
-        });
-      }),
-      startWith({dataState: DataStateEnumResto.LOADING}),
-      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
-    );
-  }
-
-  // tslint:disable-next-line:typedef
   private onGetProduct(product: Restaurant) {
     this.router.navigateByUrl('rest-item/' + product.id);
   }
 
-  onGetProductCustom(actionType: ProductActionsTypesResto, tableName: string, attributName: string, worGetName: string): void {
+  onGetProductCustom(actionType: ProductActionsTypesResto | EventProductActionsTypesResto, tableName: string, attributName: string, worGetName: string): void {
     // console.log('actionTYpe onGetProductCustom', actionType);
     this.productResto$ = this.serviceResto.getCustum(tableName, attributName, worGetName).pipe(
       map(data => {
