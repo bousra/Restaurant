@@ -8,57 +8,30 @@ import {Restaurant} from '../model/resto.model';
 export class RestoService {
   constructor(private http: HttpClient) {
   }
-  getAllProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto');
-  }
-  getEntreesProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?categories=entree');
-  }
-  getSaladesProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?categories=salade');
-  }
-  getResistanceProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?categories=resistance');
-  }
-  getDessertProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?categories=dessert');
-  }
-  getBoissonProducts(): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?categories=boisson');
-  }
   getResearchProducts(keyword: string | number): Observable<Restaurant[]>{
     const host = environment.host;
     return this.http.get<Restaurant[]>(host + '/resto?name_like=' + keyword);
   }
-
-  getBioProducts(): Observable<Restaurant[]> {
+  getProduct(tableName: string, attributName?: string, productId?: number): Observable<Restaurant>{
     const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=bio');
+    return this.http.get<Restaurant>(host + '/' + tableName + '/' + productId);
   }
-
-
-  getVeganProducts(): Observable<Restaurant[]> {
+  getCustum(tableName: string | null = 'resto', attributName: string | null = null, wordGetName: string | null = null): Observable<Restaurant[]>{
     const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=vegan');
-  }
+    console.log(host + '/' + tableName + '?' + attributName);
+    if (tableName !== null && tableName !== ''){
 
-  getVegetarienProducts(): Observable<Restaurant[]> {
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?regime=vegetarien');
-  }
+      if ( (attributName === null || attributName === '') && (wordGetName === null || wordGetName === '')){
+        return this.http.get<Restaurant[]>(host + '/' + tableName );
+      }
+      else if ((attributName !== null || attributName !== '') && (wordGetName === null || wordGetName === '') ){
+        return this.http.get<Restaurant[]>(host + '/' + tableName + '?' + attributName);
+      }
+      else if ((attributName !== null || attributName !== '') && (wordGetName !== null || wordGetName !== '')){
 
- getSansGlutenProducts(): Observable<Restaurant[]> {
-   const host = environment.host;
-   return this.http.get<Restaurant[]>(host + '/resto?regime=sansGluten');
-  }
-  getProduct(productId: number): Observable<Restaurant>{
-    const host = environment.host;
-    return this.http.get<Restaurant>(host + '/resto/' + productId);
+        return this.http.get<Restaurant[]>(host + '/' + tableName + '?' + attributName + '=' + wordGetName);
+      }
+    }
+
   }
 }
