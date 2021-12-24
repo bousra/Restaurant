@@ -35,33 +35,20 @@ export class RestListFiltreComponent implements OnInit {
       return '#e46e0a';
     }
   };
-
+  AllProduct = {
+    ID: ProductActionsTypesResto.GET_ALL_PRODUCTS,
+    ALL_BIO: EventProductActionsTypesResto.GET_BIO_PRODUCTS,
+    ALL_VEGAN: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS,
+    ALL_SANS_GLUTEN: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS,
+    ALL_VEGETARIEN: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
+  };
   constructor() { }
 
   ngOnInit(): void {
   }
-// tslint:disable-next-line:typedef
-  onGetBioProducts() {
+  onGetFilter(types: EventProductActionsTypesResto): void{
     this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_BIO_PRODUCTS
-    });
-  }
-// tslint:disable-next-line:typedef
-  onGetVeganProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS
-    });
-  }
-  // tslint:disable-next-line:typedef
-  onGetSansGlutenProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS
-    });
-  }
-  // tslint:disable-next-line:typedef
-  onGetVegetarienProducts() {
-    this.productRestoEventEmitter.emit({
-      type: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
+      type: types
     });
   }
 

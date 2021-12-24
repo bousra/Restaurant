@@ -115,5 +115,37 @@
       "note": 2,
       "imgName": "mojito_sans_alcool.jpg"
     }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "nom": "All",
+      "numero": 1
+    },
+    {
+      "id": 2,
+      "nom": "Entrées",
+      "numero": 1
+    },
+    {
+      "id": 3,
+      "nom": "Salades",
+      "numero": 1
+    },
+    {
+      "id": 4,
+      "nom": "Plats de résistance",
+      "numero": 1
+    },
+    {
+      "id": 5,
+      "nom": "Desserts",
+      "numero": 1
+    },
+    {
+      "id": 6,
+      "nom": "Boisson",
+      "numero": 1
+    }
   ]
 }

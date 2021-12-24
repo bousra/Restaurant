@@ -18,7 +18,10 @@ import {environment} from '../../../environments/environment';
   templateUrl: './resto-products.component.html',
   styleUrls: ['./resto-products.component.css']
 })
+
 export class RestoProductsComponent implements OnInit {
+  constructor(private serviceResto: RestoService, private router: Router) {
+  }
 
   @Output() productResto$: Observable<AppDataStateResto<Restaurant[]>> | null = null ;
   readonly DataStateEnumResto = DataStateEnumResto;
@@ -30,8 +33,7 @@ export class RestoProductsComponent implements OnInit {
     ALL_SANS_GLUTEN: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS,
     ALL_VEGETARIEN: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
   };
-  constructor(private serviceResto: RestoService, private router: Router) {
-  }
+   testA = 'test marche';
 
   ngOnInit(): void {
   }
@@ -101,6 +103,7 @@ export class RestoProductsComponent implements OnInit {
   onGetProductCustom(eventRegimeActionType: EventProductActionsTypesResto | null = null,
                      actionType: ProductActionsTypesResto, tableName: string, attributName: string, worGetName: string): void {
     // console.log('actionTYpe onGetProductCustom', actionType);
+    this.test();
     this.productResto$ = this.serviceResto.getCustum(tableName, attributName, worGetName).pipe(
       map(data => {
         return ({
@@ -114,6 +117,10 @@ export class RestoProductsComponent implements OnInit {
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
     );
+  }
+  test(): any{
+
+    console.log('test du testA :' + this['test' + 'A']);
   }
 
 }

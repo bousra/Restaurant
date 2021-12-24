@@ -22,28 +22,35 @@
           <!-- Reggime Alimentaire All product-->
           <ng-container *ngSwitchCase="ProductActionsTypesResto.GET_ALL_PRODUCTS">
             <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center" *ngFor="let regime of AllProduct">
                 <button class="btn btnRegime"
-                        [ngClass]="result.eventActionTypes===EventProductActionsTypesResto.GET_BIO_PRODUCTS?'activeButtonMenu':''"
-                        (click)="onGetBioProducts()" style="margin-left: 5px">Bio
+                        [ngClass]="result.eventRegimeActionTypes===regime.ALL_NAME?'activeButtonMenu':''"
+                        (click)="onGetFilter(EventProductActionsTypesResto.GET_BIO_PRODUCTS)" style="margin-left: 5px">Bio
                 </button>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
                 <button class="btn btnRegime"
-                        [ngClass]="result.eventActionTypes===EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS?'activeButtonMenu':''"
-                        (click)="onGetVegetarienProducts()" style="margin-left: 5px">V&eacute;g&eacute;tarien
+                        [ngClass]="result.eventRegimeActionTypes===EventProductActionsTypesResto.GET_BIO_PRODUCTS?'activeButtonMenu':''"
+                        (click)="onGetFilter(EventProductActionsTypesResto.GET_BIO_PRODUCTS)" style="margin-left: 5px">Bio
+                </button>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
+                <button class="btn btnRegime"
+                        [ngClass]="result.eventRegimeActionTypes===EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS?'activeButtonMenu':''"
+                        (click)="onGetFilter(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS)" style="margin-left: 5px">V&eacute;g&eacute;tarien
                 </button>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
                 <button class="btn btnRegime"
-                        [ngClass]="result.eventActionTypes===EventProductActionsTypesResto.GET_VEGAN_PRODUCTS?'activeButtonMenu':''"
-                        (click)="onGetVeganProducts()" style="margin-left: 5px">V&eacute;gan
+                        [ngClass]="result.eventRegimeActionTypes===EventProductActionsTypesResto.GET_VEGAN_PRODUCTS?'activeButtonMenu':''"
+                        (click)="onGetFilter(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS)" style="margin-left: 5px">V&eacute;gan
                 </button>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center">
                 <button class="btn btnRegime"
-                        [ngClass]="result.eventActionTypes===EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS?'activeButtonMenu':''"
-                        (click)="onGetSansGlutenProducts()" style="margin-left: 5px">Sans gluten
+                        [ngClass]="result.eventRegimeActionTypes===EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS?'activeButtonMenu':''"
+                        (click)="onGetFilter(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS)" style="margin-left: 5px">Sans gluten
                 </button>
               </div>
             </div>

@@ -8,6 +8,7 @@ import {
 import {Observable} from 'rxjs';
 import {Restaurant} from '../../../model/resto.model';
 import {Options} from '@angular-slider/ngx-slider';
+import {RestoService} from '../../../services/resto.service';
 
 @Component({
   selector: 'app-rest-list',
@@ -15,7 +16,7 @@ import {Options} from '@angular-slider/ngx-slider';
   styleUrls: ['./rest-list.component.css']
 })
 export class RestListComponent implements OnInit {
-  constructor() {
+  constructor(private service: RestoService) {
   }
 
   @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
@@ -40,6 +41,7 @@ export class RestListComponent implements OnInit {
   };
   ngOnInit(): void {
     this.onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);
+
   }
 
   // tslint:disable-next-line:typedef
