@@ -20,6 +20,10 @@ export enum EventProductActionsTypesResto {
   GET_VEGETARIEN_PRODUCTS = '[Product] Get Végétarien Products',
   GET_SANS_GLUTEN_PRODUCTS = '[Product] Get Sans Gluten Products',
 }
+export enum EventPlace{
+  MENU_CATEGORIES_EVENT= 'MENU CATEGORIES EVENT',
+  MENU_REGIME_EVENT = 'REGIME MENU EVENT'
+}
 
 export interface ActionEventResto{
   type: ProductActionsTypesResto | EventProductActionsTypesResto;
@@ -30,6 +34,6 @@ export interface  AppDataStateResto<T> {
   data?: T;
   errorMessage?: string;
   actionTypes?: ProductActionsTypesResto;
-  eventActionTypes?: EventProductActionsTypesResto;
+  eventRegimeActionTypes?: EventProductActionsTypesResto;
 }
 

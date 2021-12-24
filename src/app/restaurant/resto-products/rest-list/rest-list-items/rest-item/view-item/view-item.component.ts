@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Restaurant} from '../../../../../../model/resto.model';
-import {compareSegments} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker";
+
 enum ingredientType {
   INGREDIENT_UN= 'INGREDIENT_UN',
   INGREDIENT_DEUX= 'INGREDIENT_DEUX',
