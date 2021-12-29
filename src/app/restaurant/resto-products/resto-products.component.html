@@ -1,9 +1,14 @@
 
 <div class="Rectangle-605">
-  <app-rest-list [productsInput$]="productResto$" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list>
+    <app-rest-list [productsInput$]="plat$"
+                 [plat]="platFiltrer"
+                 [menuCategories$]="menuCategories$"
+                 [currentMenuItem$]="currentMenuItem$"
+                 [options]="options"
+                 [regimeForCurrentCategory]="regimeForCurrentCategory"
+                 (productEmitterCustom)="onActionEventCustom($event)"></app-rest-list>
+
 </div>
-
-
 
 
 

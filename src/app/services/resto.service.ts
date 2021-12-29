@@ -2,36 +2,39 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {Restaurant} from '../model/resto.model';
+import {Menu, MenuItem, Plat, PlatMenuItem, Restaurant} from '../model/resto.model';
 
 @Injectable({providedIn: 'root'})
 export class RestoService {
+  host = environment.host;
   constructor(private http: HttpClient) {
   }
   getResearchProducts(keyword: string | number): Observable<Restaurant[]>{
-    const host = environment.host;
-    return this.http.get<Restaurant[]>(host + '/resto?name_like=' + keyword);
+    return this.http.get<Restaurant[]>(this.host + '/resto?name_like=' + keyword);
   }
   getProduct(tableName: string, attributName?: string, productId?: number): Observable<Restaurant>{
-    const host = environment.host;
-    return this.http.get<Restaurant>(host + '/' + tableName + '/' + productId);
+    return this.http.get<Restaurant>(this.host + '/' + tableName + '/' + productId);
   }
-  getCustum(tableName: string | null = 'resto', attributName: string | null = null, wordGetName: string | null = null): Observable<Restaurant[]>{
-    const host = environment.host;
-    console.log(host + '/' + tableName + '?' + attributName);
+  getPlatMenuCatergorie<T>(tableName: string | null , attributName: string | null = null, wordGetName: string | number | null = null): Observable<T>{
+
     if (tableName !== null && tableName !== ''){
 
       if ( (attributName === null || attributName === '') && (wordGetName === null || wordGetName === '')){
-        return this.http.get<Restaurant[]>(host + '/' + tableName );
+        return this.http.get<T> (this.host + '/' + tableName );
       }
       else if ((attributName !== null || attributName !== '') && (wordGetName === null || wordGetName === '') ){
-        return this.http.get<Restaurant[]>(host + '/' + tableName + '?' + attributName);
+        return this.http.get<T>(this.host + '/' + tableName + '?' + attributName);
       }
       else if ((attributName !== null || attributName !== '') && (wordGetName !== null || wordGetName !== '')){
 
-        return this.http.get<Restaurant[]>(host + '/' + tableName + '?' + attributName + '=' + wordGetName);
+        return this.http.get<T>(this.host + '/' + tableName + '?' + attributName + '=' + wordGetName);
       }
     }
 
+  }
+
+  getMenuItem<T>(idMenItem: number): Observable<T> {
+    const host = environment.host;
+    return this.http.get<T>(host + '/menuItem/' + idMenItem);
   }
 }

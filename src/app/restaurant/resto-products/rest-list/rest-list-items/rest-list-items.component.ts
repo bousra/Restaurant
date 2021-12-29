@@ -6,7 +6,7 @@ import {
   DataStateEnumResto,
   ProductActionsTypesResto
 } from '../../../../State/resto.state';
-import {Restaurant} from '../../../../model/resto.model';
+import {Plat, Restaurant} from '../../../../model/resto.model';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class RestListItemsComponent implements OnInit {
   readonly DataStateEnumResto = DataStateEnumResto;
   readonly ProductActionsTypesResto = ProductActionsTypesResto;
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
+  @Input() plat: Plat [] | null ;
   selectedProduct: Restaurant;
 
   constructor() { }

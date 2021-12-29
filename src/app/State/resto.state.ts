@@ -29,11 +29,24 @@ export interface ActionEventResto{
   type: ProductActionsTypesResto | EventProductActionsTypesResto;
   payload?: any;
 }
+// cette interface permet de savoir quelle  est l'idMenu en cours ainsi
+export interface ActionEventRestoCustom{
+  type: number | string;
+  regimeType?: number;
+  payload?: any;
+}
 export interface  AppDataStateResto<T> {
   dataState?: DataStateEnumResto;
   data?: T;
   errorMessage?: string;
   actionTypes?: ProductActionsTypesResto;
   eventRegimeActionTypes?: EventProductActionsTypesResto;
+}
+export interface  AppDataStateRestoCustom<T> {
+  dataState?: DataStateEnumResto;
+  data?: T;
+  errorMessage?: string;
+  idMenu?: number;
+  idMenuItem?: number;
 }
 

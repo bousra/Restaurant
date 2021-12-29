@@ -1,14 +1,17 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
-  ActionEventResto,
+  ActionEventResto, ActionEventRestoCustom,
   AppDataStateResto,
   DataStateEnumResto, EventProductActionsTypesResto,
   ProductActionsTypesResto
 } from '../../../State/resto.state';
-import {Observable} from 'rxjs';
-import {Restaurant} from '../../../model/resto.model';
+import {Observable, of} from 'rxjs';
+import {Menu, MenuItem, Plat, PlatMenuItem, Restaurant} from '../../../model/resto.model';
 import {Options} from '@angular-slider/ngx-slider';
 import {RestoService} from '../../../services/resto.service';
+import {catchError, map, startWith} from 'rxjs/operators';
+import {AppDataMenu} from '../../../State/service-function.class';
+
 
 @Component({
   selector: 'app-rest-list',
@@ -19,38 +22,32 @@ export class RestListComponent implements OnInit {
   constructor(private service: RestoService) {
   }
 
-  @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
+  @Output() productEmitterCustom: EventEmitter<ActionEventRestoCustom> = new EventEmitter<ActionEventRestoCustom>();
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
+  @Input() menuCategories$: Observable<AppDataMenu<Menu[]>> | null;
+  @Input() regimeForCurrentCategory: string[] = [];
+  @Input() plat: Plat [] | null;
+  @Input() currentMenuItem$: Observable<AppDataMenu<MenuItem>> | null ;
+  @Input() idCurrentMenuItem: number;
+  @Input() currentMenuItemData: MenuItem | null;
+  @Input() prixMinimun = 0;
+  @Input() prixMaximum = 0;
+  @Input() options: Options | null;
   readonly DataStateEnumResto = DataStateEnumResto;
   readonly ProductActionsTypesResto = ProductActionsTypesResto;
+  data: any;
   starNumber = 0;
-  // ngx-slider
-  // https://angular-slider.github.io/ngx-slider/demos#trigger-focus-slider
-  value = 500;
-  highValue = 1000;
-  options: Options = {
-    floor: 0,
-    ceil: 4000,
-    showSelectionBar: true,
-    getSelectionBarColor: (value: number): string => {
-      return '#e46e0a';
-    },
-    getPointerColor: (value: number): string => {
-      return '#e46e0a';
-    }
-  };
-  ngOnInit(): void {
-    this.onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);
-
+  readonly  getAllProduct = 1;
+  ngOnInit(): void{
   }
 
   // tslint:disable-next-line:typedef
   onSearch(recherche: string) {
     console.log(recherche);
-    this.productRestoEventEmitter.emit({
+   /* this.productRestoEventEmitter.emit({
       type: ProductActionsTypesResto.SEARCH_PRODUCTS,
       payload: recherche
-    });
+    });*/
     return '';
   }
   // tslint:disable-next-line:typedef
@@ -64,37 +61,28 @@ export class RestListComponent implements OnInit {
     }
   }
   // tslint:disable-next-line:typedef
-  onActionEvent($event: ActionEventResto) {
-    console.log($event.type);
-    switch ($event.type) {
-      case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
-        this.onGetProductCustom(EventProductActionsTypesResto.GET_BIO_PRODUCTS);
-        break;
-      case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
-        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS);
-        break;
-      case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
-        this.onGetProductCustom(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS);
-        break;
-      case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
-        this.onGetProductCustom(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS);
-        break;
-      case(ProductActionsTypesResto.GET_PRODUCT):
-        this.onGetProduct($event.payload);
-        break;
+  onActionEvent($event: ActionEventRestoCustom) {
+    if (typeof $event.type === 'number'){
+      console.log('$event list: ', $event);
+    }
+    else if (typeof $event.type === 'string'){
+      for (const regime of this.regimeForCurrentCategory){
+        if ($event.type === regime){
+          this.productEmitterCustom.emit({
+            type: regime
+          });
+        }
+      }
     }
   }
 
-  // tslint:disable-next-line:typedef
-  private onGetProduct(product: Restaurant) {
-    this.productRestoEventEmitter.emit({
-      type: ProductActionsTypesResto.GET_PRODUCT,
-      payload: product
-    });
-  }
-  onGetProductCustom(productType: ProductActionsTypesResto | EventProductActionsTypesResto): void{
-    this.productRestoEventEmitter.emit({
-      type: productType
+  /*
+   * Customming function
+   */
+  // Fonction onGetProductEmitCustom elle permet d'envoyer un evenement vers le parent RestProductsComponent
+  onGetProductCustom(idCurrentMenu: number): void{
+    this.productEmitterCustom.emit({
+      type: idCurrentMenu
     });
   }
 }

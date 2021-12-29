@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Restaurant} from '../../../../../model/resto.model';
+import {Plat, Restaurant} from '../../../../../model/resto.model';
 import {ActionEventResto, ProductActionsTypesResto} from '../../../../../State/resto.state';
 import {ActivatedRoute} from '@angular/router';
 import {RestoService} from '../../../../../services/resto.service';
@@ -13,8 +13,8 @@ export class RestItemComponent implements OnInit {
   productItemId: number;
   BaseLinkImg = 'assets/images/restaurant/';
   @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
-  @Input() productItem: Restaurant | null = null;
-  product: Restaurant | null = null;
+  @Input() productItem: Plat | null = null;
+  product: Plat | null = null;
   constructor(private activatedRoute: ActivatedRoute, private restoService: RestoService) {
     // this.productItemId = this.activatedRoute.snapshot.params.id;
   }
@@ -27,7 +27,7 @@ export class RestItemComponent implements OnInit {
     });*/
   }
   // tslint:disable-next-line:typedef
-  onGetProductItem(product: Restaurant) {
+  onGetProductItem(product: Plat) {
       // this.productRestoEventEmitter.emit({
       //   type: ProductActionsTypesResto.GET_PRODUCT,
       //   payload: product

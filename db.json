@@ -33,12 +33,12 @@
       "id": 6
     }
   ],
-  "resto": [
+  "plat": [
     {
       "id": 1,
       "name": "Salades japonaises",
       "price": 1000,
-      "categories": "entree",
+      "categories": "Entrées",
       "regime": "bio",
       "note": 2,
       "imgName": "Salade_Japonaise.jpg"
@@ -47,7 +47,7 @@
       "id": 2,
       "name": "Avocado toasts",
       "price": 1500,
-      "categories": "salade",
+      "categories": "Salades",
       "regime": "vegetarien",
       "note": 5,
       "imgName": "avocado_toast.jpg"
@@ -55,7 +55,7 @@
     {
       "name": "Cocktail Bora Bora",
       "price": 700,
-      "categories": "boisson",
+      "categories": "Boisson",
       "regime": "vegan",
       "id": 3,
       "note": 4,
@@ -64,7 +64,7 @@
     {
       "name": "Caviar d'aubergine facile",
       "price": 1500,
-      "categories": "resistace",
+      "categories": "Plats de résistance",
       "regime": "sansGluten",
       "id": 4,
       "note": 3,
@@ -73,7 +73,7 @@
     {
       "name": "Mini Club Sandwidichs",
       "price": 1000,
-      "categories": "dessert",
+      "categories": "Desserts",
       "regime": "vegan",
       "id": 5,
       "note": 1,
@@ -82,7 +82,7 @@
     {
       "name": "tartare de tomate",
       "price": 1000,
-      "categories": "resistance",
+      "categories": "Plats de résistance",
       "regime": "sansGluten",
       "id": 6,
       "note": 4,
@@ -91,7 +91,7 @@
     {
       "name": "Roses de pommes feuilltes",
       "price": 1500,
-      "categories": "resistance",
+      "categories": "Plats de résistance",
       "regime": "vegan",
       "id": 7,
       "note": 2,
@@ -100,52 +100,139 @@
     {
       "name": "Brochette de boeuf",
       "price": 2000,
-      "categories": "resistance",
+      "categories": "Plats de résistance",
       "regime": "vegan",
       "id": 8,
       "note": 2,
-      "imgName": "brochette de boeuf.jpg"
+      "imgName": "brochette_de_boeuf.jpg"
     },
     {
       "name": "Mojoto sans alcool",
       "price": 1000,
-      "categories": "resistance",
+      "categories": "Plats de résistance",
       "regime": "bio",
       "id": 9,
       "note": 2,
       "imgName": "mojito_sans_alcool.jpg"
     }
   ],
-  "menu": [
+  "menuItem": [
     {
       "id": 1,
+      "idMenu": 1,
       "nom": "All",
-      "numero": 1
+      "prixMax": 3000,
+      "prixMin": 500
     },
     {
       "id": 2,
+      "idMenu": 1,
       "nom": "Entrées",
-      "numero": 1
+      "prixMax": 4000,
+      "prixMin": 500
     },
     {
       "id": 3,
+      "idMenu": 1,
       "nom": "Salades",
-      "numero": 1
+      "prixMax": 8000,
+      "prixMin": 500
     },
     {
       "id": 4,
+      "idMenu": 1,
       "nom": "Plats de résistance",
-      "numero": 1
+      "prixMax": 9000,
+      "prixMin": 500
     },
     {
       "id": 5,
+      "idMenu": 1,
       "nom": "Desserts",
-      "numero": 1
+      "prixMax": 2000,
+      "prixMin": 500
     },
     {
       "id": 6,
+      "idMenu": 1,
       "nom": "Boisson",
-      "numero": 1
+      "prixMax": 2000,
+      "prixMin": 500
     }
-  ]
+  ],
+  "platMenuItem": [
+    {
+      "id": 1,
+      "idMenuItem": 1,
+      "idPlat": 1,
+      "nom": "Bio"
+    },
+    {
+      "id": 2,
+      "idMenuItem": 1,
+      "idPlat": 2,
+      "nom": "Végétarien"
+    },
+    {
+      "id": 3,
+      "idMenuItem": 1,
+      "idPlat": 3,
+      "nom": "Vegan"
+    },
+    {
+      "id": 4,
+      "idMenuItem": 1,
+      "idPlat": 4,
+      "nom": "Sans Gluten"
+    },
+    {
+      "id": 5,
+      "idMenuItem": 2,
+      "idPlat": 5,
+      "nom": "Vegan"
+    },
+    {
+      "id": 6,
+      "idMenuItem": 3,
+      "idPlat": 6,
+      "nom": "Vegan"
+    }
+  ],
+  "entrees": {
+    "data": [
+      {
+        "id": 1,
+        "nom": "All",
+        "numero": 1
+      },
+      {
+        "id": 2,
+        "nom": "Entrées",
+        "numero": 1
+      },
+      {
+        "id": 3,
+        "nom": "Salades",
+        "numero": 1
+      },
+      {
+        "id": 4,
+        "nom": "Plats de résistance",
+        "numero": 1
+      },
+      {
+        "id": 5,
+        "nom": "Desserts",
+        "numero": 1
+      },
+      {
+        "id": 6,
+        "nom": "Boisson",
+        "numero": 1
+      }
+    ],
+    "filtre": [
+    ]
+  }
 }
+

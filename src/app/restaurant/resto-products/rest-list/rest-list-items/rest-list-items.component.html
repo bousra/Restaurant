@@ -18,14 +18,10 @@
       <span *ngSwitchCase="ProductActionsTypesResto.GET_DESSERTS_PRODUCTS">Desserts</span>
       <span *ngSwitchCase="ProductActionsTypesResto.GET_ENTREES_PRODUCTS">Entrees</span>
       <span *ngSwitchCase="ProductActionsTypesResto.SEARCH_PRODUCTS">Les résultats de la recherche</span>
-      <span *ngSwitchCase="ProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS">Sans gluten</span>
-      <span *ngSwitchCase="ProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS">VEGETARIENS</span>
-      <span *ngSwitchCase="ProductActionsTypesResto.GET_BIO_PRODUCTS">bioS</span>
-      <span *ngSwitchCase="ProductActionsTypesResto.GET_VEGAN_PRODUCTS">Vegans</span>
       </h4>
       </div>
       <!-- Affichage des items-->
-      <div *ngFor="let p of result.data " class="col-xs-12 col-sm-6 col-md-6 col-lg-4" (click)="onGetProductItem(p)">
+      <div *ngFor="let p of plat " class="col-xs-12 col-sm-6 col-md-6 col-lg-4" (click)="onGetProductItem(p)">
         <app-rest-item [productItem]="p" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-item>
       </div>
 

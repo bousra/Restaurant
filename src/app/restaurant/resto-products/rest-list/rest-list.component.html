@@ -7,57 +7,43 @@
         <input class="form-control me-2 inputForm" style="padding: 5px 20px;"
                (keyup)="onSearch(recherche.value)"
                #recherche name="keyword" type="text" placeholder="  Rechercher">
-        <button type="reset" class="btn reset" (click)="onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);"><i class="fa fa-times"></i></button>
+        <button type="reset" class="btn reset" (click)="onGetProductCustom(getAllProduct);">
+          <i class="fa fa-times"></i>
+        </button>
       </form>
-        <!--        <span><strong>Afficher le menu</strong></span>-->
+      <!--        <span><strong>Afficher le menu</strong></span>-->
     </div>
-<div class="col-xs-2 col-sm-2 hidden-lg hidden-md" style=" padding: 15px  0 0 0;text-align: center;">
-    <button class="btn MenuNav"  style="margin-left: auto;" (click)="dropDownMenuProduct()">
-      <i class="fa fa-caret-down"></i>
-    </button>
-</div>
+    <div class="col-xs-2 col-sm-2 hidden-lg hidden-md" style=" padding: 15px  0 0 0;text-align: center;">
+      <button class="btn MenuNav" style="margin-left: auto;" (click)="dropDownMenuProduct()">
+        <i class="fa fa-caret-down"></i>
+      </button>
+    </div>
   </div>
-
-  <div class="classMenuProduct" id="idMenuProduct" style="padding: 10px 0;" *ngIf="(productsInput$ | async) as result">
-    <div class="nav-resto" >
-      <div class="row" style="display: flex;padding: 0 0 15px 0;overflow-x: auto;margin-left: 0;">
-        <div class="col-xs-6 col-sm-4 col-md-1 col-lg-1 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_ALL_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_ALL_PRODUCTS);" style="margin-left: 5px">All
-          </button>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_ENTREES_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_ENTREES_PRODUCTS);" style="margin-left: 5px;">Entrees
-          </button>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_SALADES_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_SALADES_PRODUCTS);" style="margin-left: 5px;">Salades
-          </button>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS);" style="margin-left: 5px;">Plats de resistance
-          </button>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_DESSERTS_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_DESSERTS_PRODUCTS);" style="margin-left: 5px;">Desserts
-          </button>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 ">
-          <button class="btn widthBtn MenuNav"
-                  [ngClass]="result.actionTypes===ProductActionsTypesResto.GET_BOISSONS_PRODUCTS?'activeButtonMenu':''"
-                  (click)="onGetProductCustom(ProductActionsTypesResto.GET_BOISSONS_PRODUCTS);" style="margin-left: 5px;">Boissons
-          </button>
-        </div>
-      </div>
+  <div class="classMenuProduct" id="idMenuProduct" style="padding: 10px 0;">
+    <div class="nav-resto">
+      <ng-container *ngIf="(menuCategories$ | async) as result" [ngSwitch]="result.dataState">
+        <ng-container *ngSwitchCase="DataStateEnumResto.LOADING">
+          <i class="fa fa-refresh fa-spin" style="font-size:30px;"></i>
+        </ng-container>
+        <ng-container *ngSwitchCase="DataStateEnumResto .ERROR">
+          <div class="alert-danger">
+            {{result.errorMessage}}
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DataStateEnumResto.LOADED">
+          <div class="row" style="display: flex;padding: 0 0 15px 0;overflow-x: auto;margin-left: 0;">
+            <div class="col-xs-6 col-sm-4 " *ngFor="let menu of result.data"
+                 [ngClass]="menu.nom==='Plats de résistance'?'col-md-4 col-lg-2': 'col-md-3 col-lg-1'">
+              <div style="margin: 0 0 0 2px" *ngIf="(currentMenuItem$ | async) as currentMenuItem">
+                <button class="btn widthBtn MenuNav" *ngIf="currentMenuItem.data"
+                        [ngClass]="currentMenuItem.data.id===menu.id?'activeButtonMenu':''"
+                        (click)="onGetProductCustom(menu.id);">{{menu.nom}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 
@@ -65,9 +51,11 @@
     <!--
       Colonne Filtres
     -->
-
-    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-      <app-rest-list-filtre class="hidden-xs" [productsInput$]="productsInput$" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list-filtre>
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" *ngIf="(currentMenuItem$ | async) as result">
+      <app-rest-list-filtre class="hidden-xs"
+                            [regimeForCurrentCategory]="regimeForCurrentCategory"
+                            [options]="options"
+                            (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list-filtre>
 
     </div>
 
@@ -76,7 +64,9 @@
     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-8" style="padding: 0;">
       <!-- Affichage des donnees-->
       <div class="container-fluid">
-        <app-rest-list-items [productsInput$]="productsInput$" (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list-items>
+        <app-rest-list-items [productsInput$]="productsInput$"
+                             [plat]="plat"
+                             (productRestoEventEmitter)="onActionEvent($event)"></app-rest-list-items>
       </div>
     </div>
   </div>

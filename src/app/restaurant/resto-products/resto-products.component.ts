@@ -1,17 +1,19 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {
-  ActionEventResto,
+  ActionEventRestoCustom,
   AppDataStateResto,
-  DataStateEnumResto, EventProductActionsTypesResto,
+  DataStateEnumResto,
   ProductActionsTypesResto
 } from '../../State/resto.state';
-import {Restaurant} from '../../model/resto.model';
+import {MenuItem, Plat, PlatMenuItem, Restaurant} from '../../model/resto.model';
 import {RestoService} from '../../services/resto.service';
 import {Router} from '@angular/router';
-import {catchError, map, startWith} from 'rxjs/operators';
-import {DataStateEnum} from '../../State/product.state';
+import {catchError, map, min, startWith} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {AppDataMenu} from '../../State/service-function.class';
+import {Options} from '@angular-slider/ngx-slider';
+
 
 @Component({
   selector: 'app-resto-products',
@@ -20,25 +22,38 @@ import {environment} from '../../../environments/environment';
 })
 
 export class RestoProductsComponent implements OnInit {
+  manualRefresh: EventEmitter<void> = new EventEmitter();
+
   constructor(private serviceResto: RestoService, private router: Router) {
   }
 
-  @Output() productResto$: Observable<AppDataStateResto<Restaurant[]>> | null = null ;
-  readonly DataStateEnumResto = DataStateEnumResto;
-  readonly tableName = environment.resto;
-  AllProduct = {
-    ID: ProductActionsTypesResto.GET_ALL_PRODUCTS,
-    ALL_BIO: EventProductActionsTypesResto.GET_BIO_PRODUCTS,
-    ALL_VEGAN: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS,
-    ALL_SANS_GLUTEN: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS,
-    ALL_VEGETARIEN: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
-  };
-   testA = 'test marche';
+  currentMenuItem$: Observable<AppDataMenu<MenuItem>> | null ;
+  currentMenuItemData: MenuItem | null;
+// tableau de récupération du menu categorie
+  menuCategories$: Observable<AppDataMenu<MenuItem[]>> | null;
+  menuCategorie: MenuItem [] | null;
+  idCurrentMenuItem: number;
+  regimeForCurrentCategory: string[] = [];
+  // Recuperation du menu en cours
 
+  // tableau de récupération de tous les plats
+  plat$: Observable<AppDataStateResto<Plat[]>> | null = null;
+  plat: Plat[] | null ;
+  platFiltrer: Plat [] | null ;
+  prixMinimun: number;
+  prixMaximum: number;
+  value = 100;
+  highValue = 500;
+  options: Options;
+  prixMinMax: [id: number, prixMin: number, prixMax: number][] | null;
   ngOnInit(): void {
+    this.getPlat('plat', null, null);
+    this.getMenuCategorie('menuItem');
+    this.getCurrentMenuItem(1);
+    // this.getRegimeForCurrrentCategory(this.plat);
   }
-  // tslint:disable-next-line:typedef
-  onSearch(dataForm: string) {
+
+  onSearch(dataForm: string): void {
     // @ts-ignore
     this.productResto$ = this.serviceResto.getResearchProducts(dataForm).pipe(
       map(data => {
@@ -47,80 +62,103 @@ export class RestoProductsComponent implements OnInit {
         return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.SEARCH_PRODUCTS});
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
-      catchError(err => of({dataState: DataStateEnum.ERROR, errorMessage: err.message}))
+      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
     );
   }
 
-  // tslint:disable-next-line:typedef
-  onActionEvent($event: ActionEventResto) {
-    switch ($event.type) {
-      case(ProductActionsTypesResto.GET_ALL_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_ALL_PRODUCTS, this.tableName, null, null);
-        break;
-      case(ProductActionsTypesResto.GET_ENTREES_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_ENTREES_PRODUCTS, this.tableName, 'categories', 'entree');
-        break;
-      case(ProductActionsTypesResto.GET_DESSERTS_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_DESSERTS_PRODUCTS, this.tableName, 'categories', 'dessert');
-        break;
-      case(ProductActionsTypesResto.SEARCH_PRODUCTS):
-        this.onSearch($event.payload);
-        break;
-      case(ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_RESISTANCE_PRODUCTS, this.tableName,  'categories', 'resistance');
-        break;
-      case(ProductActionsTypesResto.GET_BOISSONS_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_BOISSONS_PRODUCTS, this.tableName, 'categories', 'boisson');
-        break;
-      case(ProductActionsTypesResto.GET_SALADES_PRODUCTS):
-        this.onGetProductCustom(null, ProductActionsTypesResto.GET_SALADES_PRODUCTS, this.tableName, 'categories', 'salade');
-        break;
-      case(EventProductActionsTypesResto.GET_BIO_PRODUCTS):
-        this.onGetProductCustom(this.AllProduct.ALL_BIO, this.AllProduct.ID,
-          this.tableName, 'regime', 'bio');
-        break;
-      case(EventProductActionsTypesResto.GET_VEGAN_PRODUCTS):
-        this.onGetProductCustom(this.AllProduct.ALL_VEGAN, this.AllProduct.ID, this.tableName, 'regime', 'vegan');
-        break;
-      case(EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS):
-        this.onGetProductCustom(this.AllProduct.ALL_VEGETARIEN, this.AllProduct.ID, this.tableName, 'regime', 'vegetarien');
-        break;
-      case(EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS):
-        this.onGetProductCustom(this.AllProduct.ALL_SANS_GLUTEN, this.AllProduct.ID, this.tableName, 'regime', 'sansGluten');
-        break;
-        break;
-      case(ProductActionsTypesResto.GET_PRODUCT):
-        this.onGetProduct($event.payload);
-        break;
-    }
-  }
-
-  // tslint:disable-next-line:typedef
-  private onGetProduct(product: Restaurant) {
+  onGetProduct(product: Restaurant): void {
     this.router.navigateByUrl('rest-item/' + product.id);
   }
 
-  onGetProductCustom(eventRegimeActionType: EventProductActionsTypesResto | null = null,
-                     actionType: ProductActionsTypesResto, tableName: string, attributName: string, worGetName: string): void {
-    // console.log('actionTYpe onGetProductCustom', actionType);
-    this.test();
-    this.productResto$ = this.serviceResto.getCustum(tableName, attributName, worGetName).pipe(
+  // recuperation des plats à partir du service
+  getPlat(tableName: string, attributName: string, wordGetName: string): void {
+    this.plat$ = this.serviceResto.getPlatMenuCatergorie<Plat[]>(tableName, attributName, wordGetName).pipe(
       map(data => {
-        return ({
-          dataState: DataStateEnumResto.LOADED,
-          data,
-          actionTypes: actionType,
-          eventRegimeActionTypes: eventRegimeActionType
+        this.plat = data;
+        this.platFiltrer = this.plat;
+        this.regimeForCurrentCategory = [];
+       // recuperation de tous les regimes
+        for (const platItem of data){
+          this.regimeForCurrentCategory.push(platItem.regime);
+        }
+        // filtre des regimes pour supprimer les duplicatas
+        this.regimeForCurrentCategory = this.regimeForCurrentCategory.filter((c, index) => {
+          return this.regimeForCurrentCategory.indexOf(c) === index;
         });
-
+        return ({dataState: DataStateEnumResto.LOADED, data});
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
       catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
     );
   }
-  test(): any{
 
-    console.log('test du testA :' + this['test' + 'A']);
+  // recuperation des categories à partir du service
+  getMenuCategorie(tableName: string): void {
+    this.menuCategories$ = this.serviceResto.getPlatMenuCatergorie<MenuItem[]>(tableName, null, null).pipe(
+      map(data => {
+        this.menuCategorie = data;
+        return ({dataState: DataStateEnumResto.LOADED, data});
+      }),
+      startWith({dataState: DataStateEnumResto.LOADING}),
+      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
+    );
   }
 
+  onActionEventCustom($event: ActionEventRestoCustom): void {
+    if (typeof $event.type === 'number') {
+      this.getCurrentMenuItem($event.type);
+      for (const  menuItem of this.menuCategorie){
+        if ($event.type === menuItem.id && $event.type === 1 ) {
+          this.getPlat('plat', null, null);
+        }
+        if ($event.type === menuItem.id && $event.type !== 1){
+          this.getPlat('plat', 'categories', menuItem.nom);
+        }
+      }
+    }
+    else if (typeof $event.type === 'string'){
+      this.platFiltrer = this.plat.filter(e => e.regime === $event.type);
+    }
+
+  }
+
+  // recuperation du menu courant
+  getCurrentMenuItem(idMenuItem: number): void{
+    this.currentMenuItem$ = this.serviceResto.getMenuItem<MenuItem>(idMenuItem).pipe(
+      map(data => {
+        this.idCurrentMenuItem = idMenuItem;
+        // this.prixMinMax = [];
+        this.prixMinimun = data.prixMin;
+        this.prixMaximum = data.prixMax;
+        this.setNewMaxRange(this.prixMinimun, this.prixMaximum);
+        return ({
+          dataState: DataStateEnumResto.LOADED,
+          data
+        });
+      }),
+      startWith({dataState: DataStateEnumResto.LOADING}),
+      catchError(err => of({dataState: DataStateEnumResto.ERROR, errorMessage: err.message}))
+    );
+
+    this.currentMenuItem$.subscribe(data => {
+        this.currentMenuItemData = data.data;
+      }
+    );
+  }
+  setNewMaxRange(minVal: number, maxVal: number): void {
+    this.options = {
+      floor: minVal,
+      ceil: maxVal,
+      showSelectionBar: true,
+      getSelectionBarColor: (value: number): string => {
+        return '#e46e0a';
+      },
+      getPointerColor: (value: number): string => {
+        return '#e46e0a';
+      }
+    };
+    console.log(this.options);
+    this.manualRefresh.emit();
+    console.log(this.manualRefresh);
+  }
 }

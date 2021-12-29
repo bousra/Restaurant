@@ -1,55 +1,47 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable} from 'rxjs';
+import {async, Observable, of} from 'rxjs';
 import {
-  ActionEventResto,
-  AppDataStateResto,
+  ActionEventResto, ActionEventRestoCustom,
+  AppDataStateResto, DataStateEnumResto,
   EventProductActionsTypesResto,
   ProductActionsTypesResto
 } from '../../../../State/resto.state';
-import {Restaurant} from '../../../../model/resto.model';
+import {MenuItem, PlatMenuItem, Restaurant} from '../../../../model/resto.model';
 import {Options} from '@angular-slider/ngx-slider';
+import {RestoService} from '../../../../services/resto.service';
+import {catchError, map, startWith} from 'rxjs/operators';
+
 @Component({
   selector: 'app-rest-list-filtre',
   templateUrl: './rest-list-filtre.component.html',
   styleUrls: ['./rest-list-filtre.component.css']
 })
 export class RestListFiltreComponent implements OnInit {
-  @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
-  @Output() productRestoEventEmitter: EventEmitter<ActionEventResto> = new EventEmitter<ActionEventResto>();
-  readonly ProductActionsTypesResto = ProductActionsTypesResto;
-  readonly EventProductActionsTypesResto = EventProductActionsTypesResto;
-
+  @Output() productRestoEventEmitter: EventEmitter<ActionEventRestoCustom> = new EventEmitter<ActionEventRestoCustom>();
+  manualRefresh: EventEmitter<void> = new EventEmitter();
+  @Input() platMenuItem: PlatMenuItem [] | null;
+  @Input() regimeForCurrentCategory: string[] = [];
+  @Input() currentMenuItem$: Observable<AppDataStateResto<MenuItem>> | null = null;
+  @Input() prixMinimun = 0;
+  @Input() prixMaximum = 0;
+  @Input() currentMenuItemData: MenuItem | null = null;
   starNumber = 0;
   // ngx-slider
   // https://angular-slider.github.io/ngx-slider/demos#trigger-focus-slider
-  value = 500;
-  highValue = 1000;
-  options: Options = {
-    floor: 0,
-    ceil: 4000,
-    showSelectionBar: true,
-    getSelectionBarColor: (value: number): string => {
-      return '#e46e0a';
-    },
-    getPointerColor: (value: number): string => {
-      return '#e46e0a';
-    }
-  };
-  AllProduct = {
-    ID: ProductActionsTypesResto.GET_ALL_PRODUCTS,
-    ALL_BIO: EventProductActionsTypesResto.GET_BIO_PRODUCTS,
-    ALL_VEGAN: EventProductActionsTypesResto.GET_VEGAN_PRODUCTS,
-    ALL_SANS_GLUTEN: EventProductActionsTypesResto.GET_SANS_GLUTEN_PRODUCTS,
-    ALL_VEGETARIEN: EventProductActionsTypesResto.GET_VEGETARIEN_PRODUCTS
-  };
-  constructor() { }
+  value = 1000;
+  highValue = 1500;
+  @Input() options: Options | null = null;
+
+  constructor(private service: RestoService) {
+  }
 
   ngOnInit(): void {
+
   }
-  onGetFilter(types: EventProductActionsTypesResto): void{
+
+  onGetFilter(types: string | number): void {
     this.productRestoEventEmitter.emit({
       type: types
     });
   }
-
 }
