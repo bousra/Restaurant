@@ -3,15 +3,14 @@
   <div data-toggle="modal" data-target="#productView"
        style="margin:5px;padding:5px;cursor:pointer;background-color: #e7e7e7;
      height: 120px;border-radius: 5px;border-style: solid;border-color: #e7e7e7;display: flex;flex-direction: row;">
-
     <div>
       <img [src]='BaseLinkImg+productItem.imgName'
            style="height:90px; width:90px;border-radius: 5px;border: solid 1px #cb674e;">
     </div>
     <div style="padding: 0 0 0 10px;text-align: left;">
-      <h5 style="margin-top:0;color: #cb674e;text-transform: capitalize;">{{productItem.name}}</h5>
+      <h5 style="margin-top:0;color: #cb674e;text-transform: capitalize;">{{productItem.nom}}</h5>
       <h5 style="margin-top: 0;"><i class="fa fa-money" aria-hidden="true"
-                                    style="color: #cb674e;margin-right: 5px;"></i>{{productItem.price}} <span
+                                    style="color: #cb674e;margin-right: 5px;"></i>{{productItem.prix}} <span
         style="text-transform: uppercase">fcfa</span></h5>
       <span id="starNumber" style="color: #ccac00;">
                     <i class="fa fa-star" style="margin-right: 5px"></i>

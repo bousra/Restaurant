@@ -20,7 +20,7 @@ export class RestListItemsComponent implements OnInit {
   readonly ProductActionsTypesResto = ProductActionsTypesResto;
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
   @Input() plat: Plat [] | null ;
-  selectedProduct: Restaurant;
+  selectedProduct: Plat;
 
   constructor() { }
 
@@ -30,7 +30,7 @@ export class RestListItemsComponent implements OnInit {
   onActionEvent($event: ActionEventResto){
     this.productRestoEventEmitter.emit($event);
   }
-  onGetProductItem(product: Restaurant): void {
+  onGetProductItem(product: Plat): void {
     this.selectedProduct = product;
   }
 }

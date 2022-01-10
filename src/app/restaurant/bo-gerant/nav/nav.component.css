@@ -1,0 +1,31 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+.nav-bo{
+  min-height: 300px;
+  width: 300px;
+  height: calc(100vh - 75px);
+}
+.list-group-item{
+  color: #FFFFFF;
+  border: 0;
+}
+#hidden-toggle:checked + div.nav-bo h4{
+  display: none;
+}
+.my-item{
+  background-color: #ae4c33;
+}
+.my-item-show,.my-item-show:focus,.my-item-show:hover{
+  background-color: #e4b9b9;
+  list-style-type: none;
+  color: #ae4c33;
+  text-transform: capitalize;
+  text-align: left;
+  font-size: 1.5rem;
+  font-width: 600;
+  padding: 20px;
+}
+
+

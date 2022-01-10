@@ -57,8 +57,6 @@ export class RestoProductsComponent implements OnInit {
     // @ts-ignore
     this.productResto$ = this.serviceResto.getResearchProducts(dataForm).pipe(
       map(data => {
-        console.log('dataForm Resto-products:' + dataForm);
-        console.log(data);
         return ({dataState: DataStateEnumResto.LOADED, data, actionTypes: ProductActionsTypesResto.SEARCH_PRODUCTS});
       }),
       startWith({dataState: DataStateEnumResto.LOADING}),
@@ -157,8 +155,6 @@ export class RestoProductsComponent implements OnInit {
         return '#e46e0a';
       }
     };
-    console.log(this.options);
     this.manualRefresh.emit();
-    console.log(this.manualRefresh);
   }
 }

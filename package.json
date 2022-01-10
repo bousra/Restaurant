@@ -23,12 +23,14 @@
     "concurrently": "^6.4.0",
     "font-awesome": "^4.7.0",
     "json-server": "^0.17.0",
+    "primeicons": "^5.0.0",
+    "primeng": "^13.0.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.12",
+    "@angular-devkit/build-angular": "^13.1.2",
     "@angular/cli": "~11.2.12",
     "@angular/compiler-cli": "~11.2.13",
     "@types/jasmine": "~3.6.0",

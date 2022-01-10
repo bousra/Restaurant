@@ -25,7 +25,7 @@ export class RestListComponent implements OnInit {
   @Output() productEmitterCustom: EventEmitter<ActionEventRestoCustom> = new EventEmitter<ActionEventRestoCustom>();
   @Input() productsInput$: Observable<AppDataStateResto<Restaurant[]>> | null = null;
   @Input() menuCategories$: Observable<AppDataMenu<Menu[]>> | null;
-  @Input() regimeForCurrentCategory: string[] = [];
+  @Input() regimeForCurrentCategory: string[] | null;
   @Input() plat: Plat [] | null;
   @Input() currentMenuItem$: Observable<AppDataMenu<MenuItem>> | null ;
   @Input() idCurrentMenuItem: number;
@@ -39,6 +39,7 @@ export class RestListComponent implements OnInit {
   starNumber = 0;
   readonly  getAllProduct = 1;
   ngOnInit(): void{
+    console.log('regimeForCurrentCategory list: ' , this.regimeForCurrentCategory);
   }
 
   // tslint:disable-next-line:typedef

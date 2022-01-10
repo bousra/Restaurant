@@ -1,0 +1,104 @@
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content" style="padding-bottom: 10px;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8" style="position: relative;overflow: hidden;">
+        <div class="modal-body" style="padding: 0; background-color: #FFFFFF;display: flex; flex-direction: column;">
+          <div class="row" style="">
+            <div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
+              <h4 style="text-transform: capitalize;font-weight: 700;"><span class="hidden-xs hidden-sm">commande&nbsp;</span>
+                <span style="ext-transform: capitalize;">n<sup>&#9900;</sup>00345</span>
+
+              </h4>
+
+            </div>
+            <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+              <div style="display: flex; align-items: center;justify-content: flex-end;">
+                <div class="statut" style="" *ngIf="commande$ | async as commande">
+                  <ng-container [ngSwitch]="statut">
+                    <ng-container *ngSwitchCase="statut===statuts.PAS_ENCORE_SOUMISE">
+                      <span class="statutname">Pas encore soumise</span>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="statut===statuts.PRIS_EN_CHARGE">
+                      <span class="statutname">Prise en Charge</span>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="statut===statuts.RECU">
+                      <span class="statutname">Reçu</span>
+                    </ng-container>
+                  </ng-container>
+
+                </div>
+                <div style="" class="hidden-md hidden-lg">
+                  <button type="button" style="margin: 0;" class="close "
+                          data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div style="display: flex;flex-direction: row; align-items: center;">
+                  <div>
+                    <img src="assets/images/restaurant/Salade_Japonaise.jpg"
+                         style="height:60px; width:60px;border-radius: 5px;border: solid 1px #cb674e;">
+                  </div>
+                  <div style="padding: 0 0 0 10px;text-align: left;">
+                    <h5 style="margin-top:0;color: #cb674e;text-transform: capitalize;">salades japonaises</h5>
+                    <h5 style="margin-top: 0;"><i class="fa fa-money" aria-hidden="true"
+                                                  style="color: #cb674e;margin-right: 5px;"></i>1000 <span
+                      style="text-transform: uppercase">fcfa</span></h5>
+                  </div>
+                  <div style="width: 50px;margin-left:auto;display: flex;justify-content: flex-end;align-items: center;">
+                    <span style="margin-right: auto;color: #cb674e;">X3</span>
+                    <button class="btn btn-danger btn-xs" style="padding:5px 7px;border-radius: 2.5px;
+                    background-color: #cb674e;margin-left: auto;color: #FFFFFF;" (click)="delete()"><i class="fa fa-trash"></i> </button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 border-left">
+        <div class="modal-header" style="padding: 0;background-color: #FFFFFF;">
+          <div class="row">
+            <button type="button" class="close hidden-xs hidden-sm" style="margin: 0;" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div style="display: flex;flex-direction: column">
+                <h4 class="serveur" style="text-align: center;font-size: 25px;cursor: pointer;margin-right: auto;margin-left: auto;">
+                  <span style="color: #cb674e;text-transform: capitalize;padding: 0 10px; font-weight: 900;"><i class="fa fa-bell-o"></i></span>
+                  <small style="color: #cb674e;text-transform: capitalize;font-weight: 900;">serveur</small>
+                </h4>
+                <h4 class="pourboire" style="text-align: center;font-size: 25px;cursor: pointer;margin-right: auto;margin-left: auto;">
+                  <span style="text-transform: capitalize;padding: 0 10px; font-weight: 900;"><i class="fa fa-database"></i></span>
+                  <small style="text-transform: capitalize;font-weight: 900;">pourboire</small>
+                </h4>
+              </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="resume">
+                  <h4 style="text-transform: uppercase;position: relative;overflow: hidden;"><span>total&nbsp;:</span>
+                    <small style="float: right;">3000 &nbsp;fcfa</small></h4>
+                  <h4 style="text-transform: capitalize;position: relative;overflow: hidden;"><span>commande&nbsp;:</span>
+                    <small style="float: right;">3000 &nbsp;fcfa</small></h4>
+                  <h4 style="text-transform: capitalize;position: relative;overflow: hidden;"><span>pourboire&nbsp;:</span>
+                    <small style="float: right;">0 &nbsp;fcfa</small></h4>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row" style="display: flex; padding: 10px 0 5px;">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="margin-left: auto;margin-right: auto;">
+        <div class="modal-footer" style="background-color: #FFFFFF;padding:10px 0;text-align: center;">
+          <button  type="button" class="btn btn-danger" style="text-transform: uppercase;border-radius:5px;width: 100%" (click)="submit()">soumettre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

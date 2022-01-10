@@ -1,14 +1,25 @@
 
-<div class="Rectangle-605">
-    <app-rest-list [productsInput$]="plat$"
-                 [plat]="platFiltrer"
-                 [menuCategories$]="menuCategories$"
-                 [currentMenuItem$]="currentMenuItem$"
-                 [options]="options"
-                 [regimeForCurrentCategory]="regimeForCurrentCategory"
-                 (productEmitterCustom)="onActionEventCustom($event)"></app-rest-list>
+<div>
+  <div class="Rectangle-605" >
+    <div>
+      <app-rest-nav></app-rest-nav>
+    </div>
+    <div>
+      <div class="Rectangle-605">
+        <app-rest-list [productsInput$]="plat$"
+                       [plat]="platFiltrer"
+                       [menuCategories$]="menuCategories$"
+                       [currentMenuItem$]="currentMenuItem$"
+                       [options]="options"
+                       [regimeForCurrentCategory]="regimeForCurrentCategory"
+                       (productEmitterCustom)="onActionEventCustom($event)"></app-rest-list>
 
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 
 

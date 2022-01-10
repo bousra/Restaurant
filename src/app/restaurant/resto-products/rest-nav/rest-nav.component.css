@@ -29,6 +29,9 @@
   text-align: left;
   color: #000;
 }
+.Ma-commande-0-FCFA:hover{
+ color: #cb674e!important;
+}
 .Menu {
   font-family: SFPro;
   font-weight: 600;
@@ -53,7 +56,6 @@
   padding: 10px 0.3em;
 }
 .LOGO-NOM {
-  margin: 0 6.5px 12.5px 18px;
   font-family: SFPro;
   font-size: 16px;
   font-weight: bold;
@@ -64,17 +66,25 @@
   text-align: left;
   color: #cb674e;
 }
-.Rectangle {
-  margin-right: auto;
-  margin-left: auto;
-  padding: 11.5px 0 0;
-  /*border: solid 0.5px #eaedf7;*/
+
+.Rectangle{
+  padding: 6.4px 25.5px 38px 24.8px;
+}
+.activeResponsive{
+  border: 10px solid #cb674e;
+  border-bottom: 0;
+  border-top: 0;
+  border-right: 0;
 }
 .Trac-21 {
-  height: 0;
-  margin: 12.5px 0 0;
-  border: solid 0.3px #e7e7e7;
+  border-bottom: 0;
+  border-right: 0;
+  border-left: 0;
+  border-top: 1px;
+  border-style: solid;
+  border-color: #e7e7e7;
 }
-.navHeader{
-  padding: 6.4px 15px 0 54.8px;
+.menu-hidden{
+  background-color: #FFFFFF;
+
 }

@@ -1,0 +1,35 @@
+<div class="panel panel-default" style="background-color: #ebedef;">
+  <div class="panel-heading">
+    <div style="display: flex;align-items: center;justify-content: space-between">
+    <div class="title">
+      <h3 style="color: #ae4c33;text-align: left;text-transform: capitalize;font-weight: 600;">liste des commandes</h3>
+    </div>
+    <div class="row" style="display: flex;align-items: stretch">
+      <a class="btn btn-default" data-toggle="modal" data-target="filtre" style="margin-right:10px;color: #FFFFFF;display:flex;align-items:center;font-size:20px;text-transform:capitalize;
+        background-color: #ae4c33;border: 1px solid rgba(174, 76, 51, 0.2);border-radius: 3px;">
+        <i class="fa fa-refresh" ></i></a>
+        <a class="btn btn-default" data-toggle="modal" data-target="filtre" style="margin-right:10px;color: #ae4c33;display:flex;align-items:center;font-size:20px;text-transform:capitalize;
+        background-color: rgba(174, 76, 51, 0.2);border: 1px solid rgba(174, 76, 51, 0.2);border-radius: 3px;">
+          <i class="fa fa-filter fa-2x" ></i><span>filtres</span></a>
+      <a class="btn btn-default" data-toggle="modal" data-target="filtre" style="margin-right:10px;color: #ae4c33;display:flex;align-items:center;font-size:20px;text-transform:capitalize;
+        background-color: rgba(174, 76, 51, 0.2);border: 1px solid rgba(174, 76, 51, 0.2);border-radius: 3px;">
+        <i class="fa fa-tag fa-2x" ></i><span >etiquettes</span></a>
+    </div>
+    </div>
+    <div class="row" style="padding: 15px 0;">
+      <form>
+        <div class="form-group" style="position: relative;">
+          <button class="btn btn-sm" style="position: absolute;top:5px;left:5px;"><i class="fa fa-search fa-2x"></i> </button>
+          <input type="email" class="form-control" id="email" placeholder="Rechercher" >
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel-body" style="background-color: #ebedef;">
+    <div class="row">
+      <div style="width: 20%;float: left;" *ngFor="let tes of test">
+        {{tes.name}}
+      </div>
+    </div>
+  </div>
+</div>

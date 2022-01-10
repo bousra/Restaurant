@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Restaurant} from '../../../../../../model/resto.model';
+import {Plat, Restaurant} from '../../../../../../model/resto.model';
 
 enum ingredientType {
   INGREDIENT_UN= 'INGREDIENT_UN',
@@ -30,7 +30,7 @@ export class ViewItemComponent implements OnInit {
   }
   static totalSupplements = 0;
 
-  @Input() product: Restaurant | null;
+  @Input() product: Plat | null;
   BaseLinkImg = 'assets/images/restaurant/';
    quantiteIngredientUn = 1;
    quantiteIngredientDeux = 1;
@@ -84,12 +84,12 @@ export class ViewItemComponent implements OnInit {
 
   decreaseQuantity(): void {
     this.quantiteProduct--;
-    this.multiProduct = this.product.price * this.quantiteProduct;
+    this.multiProduct = this.product.prix * this.quantiteProduct;
   }
 
   increaseQuantity(): void {
     this.quantiteProduct++;
-    this.multiProduct = this.product.price * this.quantiteProduct;
+    this.multiProduct = this.product.prix * this.quantiteProduct;
   }
 
   decreaseQuantiteIngredient(ingredient: Ingredient): void {
@@ -103,7 +103,7 @@ export class ViewItemComponent implements OnInit {
   }
 
   value(): number {
-    return this.quantiteProduct * this.product.price;
+    return this.quantiteProduct * this.product.prix;
   }
 
   valueTotalSupplements(): number {

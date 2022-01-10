@@ -1,6 +1,7 @@
 <div>
   <div>
-    <h4 style="color: #cb674e;font-weight: 600;text-align: left" data-toggle="collapse" data-target="#collapse1">Filtres</h4>
+    <h4 style="color: #cb674e;font-weight: 600;text-align: left" data-toggle="collapse" data-target="#collapse1">
+      Filtres</h4>
   </div>
   <!--
   npm i @angular-slider/ngx-slider
@@ -10,16 +11,18 @@
     <!-- <intervalle de prix-->
     <div>
       <h4 style="font-weight: 600;text-align: left">Intervalle de prix</h4>
-      <ngx-slider *ngIf="options" [value]="value" [highValue]="highValue" [options]="options"
-                  style="color: #e46e0a;"></ngx-slider>
+      <ngx-slider *ngIf="options" [(value)]="value" [(highValue)]="highValue" [options]="options"
+                  style="color: #e46e0a;" (valueChange)="testHighValue()" (highValueChange)="testHighValue()"
+      ></ngx-slider>
     </div>
     <!-- Regime and note-->
 
-    <div>
+    <div >
       <h5 style="font-weight: 600; text-align: left;">R&eacute;gime alimentaire</h5>
       <ng-container *ngIf="regimeForCurrentCategory">
-        <div class="row" >
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center" *ngFor="let regime of regimeForCurrentCategory">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5" style="margin: 0 0 5px 0;text-align: center"
+               *ngFor="let regime of regimeForCurrentCategory">
             <button class="btn btnRegime"
                     (click)="onGetFilter(regime)" style="margin-left: 5px">
               {{regime}}
@@ -31,33 +34,29 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h4 style="font-weight: 600; text-align: left;">Note</h4>
-        {{currentMenuItem$ | async| json}}
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="row">
           <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
-            <h5><small style="font-weight: 400;text-align: left">Entre</small></h5>
-            <span style="color: #ccac00;">
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star-o" style="margin-right: 5px"></i>
-        <i class="fa fa-star-o" style="margin-right: 5px"></i>
-        <i class="fa fa-star-o" style="margin-right: 5px"></i>
-      </span>
+            <h5 style="margin-bottom: 0;"><small style="font-weight: 400;text-align: left">Entre</small></h5>
+            <div>
+              <span *ngFor="let star of stars" class="list-inline" style="display: inline-block;">
+                <input (click)="countStar(star)" [ngClass]="{ selected: star <= selectedValue }" class="star" type="checkbox"/>
+              </span>
+              <!---->
+            </div>
           </div>
           <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
-            <h5><small style="font-weight: 400;text-align: left">Et</small></h5>
-            <span style="color: #ccac00;">
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-        <i class="fa fa-star" style="margin-right: 5px"></i>
-      </span>
+            <h5 style="margin-bottom: 0;"><small style="font-weight: 400;margin:0;text-align: left">Et</small></h5>
+            <div>
+            <span *ngFor="let star of stars" class="list-inline" style="display: inline-block;">
+                <input class="star selected" type="checkbox"/>
+              </span>
+            </div>
+          </div>
+
+
         </div>
-
-
-      </div>
       </div>
 
     </div>

@@ -16,3 +16,21 @@
   background-color: #cb674e !important;
   color: #FFFFFF !important;
 }
+.star {
+  visibility: hidden;
+  cursor: pointer;
+  margin: 0 15px 0 0;
+}
+.star:before {
+  content: '\2606';
+  position: absolute;
+  visibility: visible;
+  height: 30px;
+  color: #ccac00;
+  font-size: 22px;
+}
+
+.selected:before {
+  content: '\2605' !important;
+}
+

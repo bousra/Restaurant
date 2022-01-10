@@ -1,3 +1,7 @@
+:root {
+  mon-bg: #1e90ff;
+}
+
 .MenuNav {
   border: 1px solid #eaedf7;
   border-radius: 4px;
@@ -37,7 +41,6 @@ input[type='text']:focus{
   /*border: solid 0.5px #eaedf7;*/
   background-color: #fff;
 }
-
 .classMenuProduct {
   overflow: hidden;
   animation: rotateY 300ms ease-in-out forwards;
